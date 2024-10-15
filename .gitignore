@@ -3,3 +3,8 @@
 /.vs
 *.sqlite
 *.vsidx
+# Visual Studio
+.vs/
+# Binaries
+bin/
+obj/
