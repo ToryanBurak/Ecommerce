@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace DataContext.EntityFramework
 {
-    public partial class bursimem_eticaretContext : DbContext
+    public partial class EcomDbContext : DbContext
     {
-        public bursimem_eticaretContext()
+        public EcomDbContext()
         {
         }
 
-        public bursimem_eticaretContext(DbContextOptions<bursimem_eticaretContext> options)
+        public EcomDbContext(DbContextOptions<EcomDbContext> options)
             : base(options)
         {
         }
