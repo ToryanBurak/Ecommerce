@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendedDataContext", "Exte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{B880530D-B06A-4FA1-9D1C-64B3384E4E56}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{4B81D408-D7B5-4063-8C0E-74B8D0C50DFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Backoffice", "Domain.Backoffice\Domain.Backoffice.csproj", "{CBD7D3E0-66D2-4A83-98E5-C83FDAC68D07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{B880530D-B06A-4FA1-9D1C-64B3384E4E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B880530D-B06A-4FA1-9D1C-64B3384E4E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B880530D-B06A-4FA1-9D1C-64B3384E4E56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBD7D3E0-66D2-4A83-98E5-C83FDAC68D07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBD7D3E0-66D2-4A83-98E5-C83FDAC68D07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBD7D3E0-66D2-4A83-98E5-C83FDAC68D07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBD7D3E0-66D2-4A83-98E5-C83FDAC68D07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +65,7 @@ Global
 		{CE7E450E-F4D7-496B-A2E7-8A489AB760A6} = {2DB7D512-2454-4D2E-B4A8-013FF8961353}
 		{BF87EA51-B65A-4FD0-B0BD-64F52E3EF5D7} = {0F0CC11B-7E2D-44B7-9F68-F178F374B216}
 		{B880530D-B06A-4FA1-9D1C-64B3384E4E56} = {0F0CC11B-7E2D-44B7-9F68-F178F374B216}
+		{CBD7D3E0-66D2-4A83-98E5-C83FDAC68D07} = {4B81D408-D7B5-4063-8C0E-74B8D0C50DFB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {52E794A4-A22B-495F-A0FF-22127E028509}

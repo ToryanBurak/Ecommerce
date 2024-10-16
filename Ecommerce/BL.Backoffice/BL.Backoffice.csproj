@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DataContext\DataContext.csproj" />
     <ProjectReference Include="..\Domain.Backoffice\Domain.Backoffice.csproj" />
+    <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
 
 </Project>

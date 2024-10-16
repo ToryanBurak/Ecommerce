@@ -14,7 +14,7 @@ namespace DataContext.EntityFramework.Provider
 {
     public class DbContextProvider : IEFContextProvider, IDisposable
     {
-        private TORINContext _dataContext;
+        private EcomDbContext _dataContext;
         //private EcomHistoryDataContext _historyDataContext;
         //private static readonly string connectionStringName = "EcomDataContext";
         private bool disposed = false;
@@ -32,21 +32,21 @@ namespace DataContext.EntityFramework.Provider
             }
         }
 
-        public TORINContext GetEcomDataContext()
+        public EcomDbContext GetEcomDataContext()
         {
-            return (TORINContext)GetDataContext();
+            return (EcomDbContext)GetDataContext();
         }
 
-        public TORINContext GetEcomFeedDataContext()
+        public EcomDbContext GetEcomFeedDataContext()
         {
-            return (TORINContext)GetFeedDataContext();
+            return (EcomDbContext)GetFeedDataContext();
         }
 
         public DbContext GetDataContext()
         {
             // TODO: Connection string icin encryption yapılacak...
             if (_dataContext == null)
-                _dataContext = new TORINContext();
+                _dataContext = new EcomDbContext();
             return _dataContext;
         }
 
@@ -54,7 +54,7 @@ namespace DataContext.EntityFramework.Provider
         {
             // TODO: Connection string icin encryption yapılacak...
             if (_dataContext == null)
-                _dataContext = new TORINContext();
+                _dataContext = new EcomDbContext();
 
             return _dataContext;
         }
@@ -73,7 +73,7 @@ namespace DataContext.EntityFramework.Provider
         {
             // TODO: Connection string icin encryption yapılacak...
             if (_dataContext == null)
-                _dataContext = new TORINContext();
+                _dataContext = new EcomDbContext();
 
             return _dataContext;
         }
@@ -183,7 +183,7 @@ namespace DataContext.EntityFramework.Provider
         public void DiscardPendingChanges()
         {
             _dataContext.Dispose();
-            _dataContext = new TORINContext();
+            _dataContext = new EcomDbContext();
         }
 
         DbContext IContext<DbContext>.GetHistoryDataContext()
