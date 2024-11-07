@@ -16,6 +16,7 @@ namespace UI.Ecommerce.Controllers
         public IActionResult Index()
         {
             return View();
+            int a = 5;
         }
 
         public IActionResult Privacy()
