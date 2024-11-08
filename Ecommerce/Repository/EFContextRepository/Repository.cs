@@ -14,17 +14,8 @@ namespace Repository.EFContextRepository
     {
         public readonly DbContext dataContext;
         public readonly IContext<DbContext> dataContextProvider;
-
-        private int UserID { get; set; }
         public Repository(IContext<DbContext> _dataContextProvider)
         {
-            dataContextProvider = _dataContextProvider;
-            dataContext = dataContextProvider.GetDataContext();
-        }
-
-        public Repository(IContext<DbContext> _dataContextProvider, int _userId)
-        {
-            UserID = _userId;
             dataContextProvider = _dataContextProvider;
             dataContext = dataContextProvider.GetDataContext();
         }

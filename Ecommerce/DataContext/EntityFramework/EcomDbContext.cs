@@ -35,9 +35,7 @@ namespace DataContext.EntityFramework
             {
                 entity.ToTable("Product", "dbo");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID");
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)

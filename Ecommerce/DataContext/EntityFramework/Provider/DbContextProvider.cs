@@ -15,8 +15,6 @@ namespace DataContext.EntityFramework.Provider
     public class DbContextProvider : IEFContextProvider, IDisposable
     {
         private EcomDbContext _dataContext;
-        //private EcomHistoryDataContext _historyDataContext;
-        //private static readonly string connectionStringName = "EcomDataContext";
         private bool disposed = false;
 
         public static string CreateUserID = "CreateUserID";
@@ -32,11 +30,6 @@ namespace DataContext.EntityFramework.Provider
             }
         }
 
-        public EcomDbContext GetEcomDataContext()
-        {
-            return (EcomDbContext)GetDataContext();
-        }
-
         public EcomDbContext GetEcomFeedDataContext()
         {
             return (EcomDbContext)GetFeedDataContext();
@@ -44,7 +37,6 @@ namespace DataContext.EntityFramework.Provider
 
         public DbContext GetDataContext()
         {
-            // TODO: Connection string icin encryption yapılacak...
             if (_dataContext == null)
                 _dataContext = new EcomDbContext();
             return _dataContext;
@@ -52,26 +44,14 @@ namespace DataContext.EntityFramework.Provider
 
         public DbContext GetFeedDataContext()
         {
-            // TODO: Connection string icin encryption yapılacak...
             if (_dataContext == null)
                 _dataContext = new EcomDbContext();
 
             return _dataContext;
         }
 
-        //public DbContext GetHistoryDataContext()
-        //{
-        //    // TODO: Connection string icin encryption yapılacak...
-        //    if (_historyDataContext == null)
-        //        _historyDataContext = new EcomHistoryDataContext(ConfigurationManager.ConnectionStrings[connectionStringName].ToString());
-
-        //    return _historyDataContext;
-        //}
-
-        //look HistoryDataContext tabloları mySql de schema olmamasından kaynaklı EcomDataContext ine dönüştürüldü.
         public DbContext GetHistoryDataContext()
         {
-            // TODO: Connection string icin encryption yapılacak...
             if (_dataContext == null)
                 _dataContext = new EcomDbContext();
 
@@ -96,82 +76,9 @@ namespace DataContext.EntityFramework.Provider
 
         public CommitDBResult CommitChanges(int UserID)
         {
-            //Look
-            //return DBContextHelper.CommitChanges(this.GetDataContext(), this.GetHistoryDataContext(), UserID);
             HistoryHelper.CommitChanges(_dataContext, UserID);
-            //SaveChanges(this.GetHistoryDataContext());
-            //setUpdateColumns(UserID);
-            //_dataContext.SaveChanges();
             CommitDBResult commitDBResult = CommitDBResult.Success;
-
-            // Transaction işlemleri burada ele alınabilir veya Identity Map kurumsal tasarım kalıbı kullanılarak
-            // sadece değişen alanları güncellemeyide sağlayabiliriz.
             return commitDBResult;
-        }
-        public void setUpdateColumns(int userId)
-        {
-            var changes = _dataContext.ChangeTracker.Entries();
-            var updateList = changes.Where(s => s.State == EntityState.Modified);
-            var insertList = changes.Where(s => s.State == EntityState.Added);
-            var dt = DateTime.UtcNow;
-            foreach (object item in updateList)
-            {
-                setIntProperty(item, UpdateUserID, userId, _dataContext);
-                setDateTimeProperty(item, UpdateTime, DateTime.UtcNow, _dataContext, false);
-            }
-            foreach (object item in insertList)
-            {
-                setIntProperty(item, UpdateUserID, userId, _dataContext);
-                setDateTimeProperty(item, UpdateTime, DateTime.UtcNow, _dataContext, true);
-                setIntProperty(item, CreateUserID, userId, _dataContext);
-                setDateTimeProperty(item, CreateTime, DateTime.UtcNow, _dataContext, true);
-            }
-        }
-        private void setDateTimeProperty(object tableName, string propertyName, DateTime propertyValue, DbContext dbContext, bool nullCheck = false)
-        {
-            dbContext.ChangeTracker.DetectChanges();
-            var haveProperty = (dbContext.ChangeTracker.Entries().FirstOrDefault(x => x.Entity.GetType().Name == tableName).CurrentValues.Properties.Any(s => s.Name == propertyName));
-
-            if (haveProperty)
-            {
-                if (nullCheck == true)
-                {
-                    dbContext.ChangeTracker.Entries().FirstOrDefault(x => x.Entity.GetType().Name == tableName).CurrentValues[propertyName] = propertyValue;
-                }
-                else
-                {
-                    dbContext.ChangeTracker.Entries().FirstOrDefault(x => x.Entity.GetType().Name == tableName).CurrentValues[propertyName] = propertyValue;
-                }
-            }
-        }
-        private void setIntProperty(object tableName, string propertyName, int propertyValue, DbContext dbContext)
-        {
-            var haveProperty = (dbContext.ChangeTracker.Entries().FirstOrDefault(x => x.Entity.GetType().Name == tableName).CurrentValues.Properties.Any(s => s.Name == propertyName));
-            if (haveProperty)
-            {
-                dbContext.ChangeTracker.Entries().FirstOrDefault(x => x.Entity.GetType().Name == tableName).CurrentValues[propertyName] = propertyValue;
-            }
-        }
-        public CommitDBResult CommitChangesWithoutHistory(int UserID)
-        {
-
-            try
-            {
-                setUpdateColumns(UserID);
-                _dataContext.SaveChanges();
-                CommitDBResult commitDBResult = CommitDBResult.Success;
-
-                // Transaction işlemleri burada ele alınabilir veya Identity Map kurumsal tasarım kalıbı kullanılarak
-                // sadece değişen alanları güncellemeyide sağlayabiliriz.
-                return commitDBResult;
-
-            }
-            catch
-            {
-                // Burada DbEntityValidationException hatalarını handle edebiliriz.
-                CommitDBResult commitDBResult = CommitDBResult.Fail;
-                return commitDBResult;
-            }
         }
 
         public void Dispose()
@@ -184,11 +91,6 @@ namespace DataContext.EntityFramework.Provider
         {
             _dataContext.Dispose();
             _dataContext = new EcomDbContext();
-        }
-
-        DbContext IContext<DbContext>.GetHistoryDataContext()
-        {
-            throw new NotImplementedException();
         }
 
         public int SaveChanges(DbContext _dataContext)
