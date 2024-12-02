@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using BL.Store;
-using Domain.Backoffice;
+using Domain.Store;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Net.Http.Headers;
 using UI.Ecommerce.Models;
 
 namespace UI.Ecommerce.Controllers
@@ -10,7 +11,7 @@ namespace UI.Ecommerce.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IMapper _mapper;
+        private IMapper _mapper;
         public HomeController(ILogger<HomeController> logger, IMapper mapper)
         {
             _logger = logger;
@@ -19,16 +20,42 @@ namespace UI.Ecommerce.Controllers
 
         public IActionResult Index()
         {
-            ProductBL productBL = new ProductBL(_mapper);
-            List<ProductDO> productList = productBL.GetAll();
-            return View(productList);
+            return View();
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
+        public IActionResult UserLogin()
+        {
+            UserDO userDO = new UserDO()
+            {
+                FirstName = "Burak",
+                LastName = "Toryan"
+            };
 
+            return View(userDO);
+        }
+
+        [HttpPost]
+        public IActionResult UserLogin(int model)
+        {
+            //if (ModelState.IsValid)
+            //{
+            //    UserBL userBL = new UserBL(_mapper);
+            //    model.LoginResponse = userBL.LoginCheck(model);
+            //    UserDO user = userBL.GetUserByID(model.LoginResponse.UserID);
+            //    if (model.LoginResponse.IsSuccess && user != null)
+            //    {
+            //        IdentityHelper.Login(user, this.HttpContext);
+            //        return RedirectToAction("Index", "Home");
+            //    }
+            //    else { return View(model); }
+            //}
+           /* else {*/ return View(model); /*}*/
+
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

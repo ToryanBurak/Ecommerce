@@ -1,10 +1,11 @@
 using AutoMapper;
+using BL.Store;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddAutoMapper();
+builder.Services.AddAutoMapper(typeof(BLInitializer));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

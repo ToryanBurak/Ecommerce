@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DataContext\DataContext.csproj" />
+    <ProjectReference Include="..\Domain.Store\Domain.Store.csproj" />
     <ProjectReference Include="..\Domain.Backoffice\Domain.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>

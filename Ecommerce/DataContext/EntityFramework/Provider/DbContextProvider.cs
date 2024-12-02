@@ -30,11 +30,6 @@ namespace DataContext.EntityFramework.Provider
             }
         }
 
-        public EcomDbContext GetEcomFeedDataContext()
-        {
-            return (EcomDbContext)GetFeedDataContext();
-        }
-
         public DbContext GetDataContext()
         {
             if (_dataContext == null)
@@ -43,14 +38,6 @@ namespace DataContext.EntityFramework.Provider
         }
 
         public DbContext GetFeedDataContext()
-        {
-            if (_dataContext == null)
-                _dataContext = new EcomDbContext();
-
-            return _dataContext;
-        }
-
-        public DbContext GetHistoryDataContext()
         {
             if (_dataContext == null)
                 _dataContext = new EcomDbContext();

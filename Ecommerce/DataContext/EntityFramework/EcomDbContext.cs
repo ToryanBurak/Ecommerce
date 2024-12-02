@@ -16,29 +16,70 @@ namespace DataContext.EntityFramework
         {
         }
 
-        public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=89.252.187.226\\MSSQLSERVER2019;Database=bursimem_eticaret;User Id=bursimem_burak;Password=burak.123;");
+                optionsBuilder.UseSqlServer("Server=bursimemfurecommerce.c9wcy6ku69dt.us-east-2.rds.amazonaws.com;Database=Ecommerce;User Id=admin;Password=2605.Burak;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("bursimem_burak");
-
-            modelBuilder.Entity<Product>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
-                entity.ToTable("Product", "dbo");
+                entity.ToTable("User");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Name)
+                entity.Property(e => e.Address)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Email)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirstName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Guid)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ImageUrlId).HasColumnName("ImageUrlID");
+
+                entity.Property(e => e.LastName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SaltString)
+                    .HasMaxLength(6)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Tc)
+                    .HasMaxLength(11)
+                    .IsUnicode(false)
+                    .HasColumnName("TC");
+
+                entity.Property(e => e.UserName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.VerifyConfirmCode)
+                    .HasMaxLength(10)
                     .IsUnicode(false);
             });
 
