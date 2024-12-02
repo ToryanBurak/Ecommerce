@@ -1,0 +1,225 @@
+﻿@model Domain.Store.UserDO
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>
+        Cartzilla | Multipurpose Bootstrap E-commerce Template
+    </title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Cartzilla - Bootstrap E-commerce Template">
+    <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap 4, html5, css3, jquery, js, gallery, slider, touch, creative, clean">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" media="screen" href="~/css/vendor.min.css">
+    <link rel="stylesheet" media="screen" id="main-styles" href="~/css/theme.min.css">
+    <!-- Google Tag Manager-->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WKV3GT5');
+    </script>
+</head>
+<!-- Body-->
+<body>
+    <!-- Google Tag Manager (noscript)-->
+    <noscript>
+        <iframe src="//www.googletagmanager.com/ns.html?id=GTM-WKV3GT5" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
+    </noscript>
+    <!-- giriş/kayıt önizleme-->
+    <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                        <li class="nav-item"><a class="nav-link active" href="#signin-tab" data-toggle="tab" role="tab" aria-selected="true"><i class="czi-unlocked mr-2 mt-n1"></i>Giriş Yap</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#signup-tab" data-toggle="tab" role="tab" aria-selected="false"><i class="czi-user mr-2 mt-n1"></i>Kayıt Ol</a></li>
+                    </ul>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body tab-content py-4">
+                    <form class="needs-validation tab-pane fade show active" autocomplete="off" novalidate id="signin-tab">
+                        <div class="form-group">
+                            <label for="si-email">E-Posta</label>
+                            <input class="form-control" type="email" id="si-email" placeholder="bursimemfur@example.com" required>
+                            <div class="invalid-feedback">Geçerli bir e-posta giriniz</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="si-password">Şifre</label>
+                            <div class="password-toggle">
+                                <input class="form-control" type="password" id="si-password" required>
+                                <label class="password-toggle-btn">
+                                    <input class="custom-control-input" type="checkbox"><i class="czi-eye password-toggle-indicator"></i><span class="sr-only">Şifreyi göster</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group d-flex flex-wrap justify-content-between">
+                            <div class="custom-control custom-checkbox mb-2">
+                                <input class="custom-control-input" type="checkbox" id="si-remember">
+                                <label class="custom-control-label" for="si-remember">Beni Hatırla</label>
+                            </div><a class="font-size-sm" href="#">Şifenizi mi unuttunuz?</a>
+                        </div>
+                        <button class="btn btn-primary btn-block btn-shadow" type="submit">Giriş Yap</button>
+                    </form>
+                    <form class="needs-validation tab-pane fade" autocomplete="off" novalidate id="signup-tab">
+                        <div class="form-group">
+                            <label for="su-name">İsim Soyisim</label>
+                            <input class="form-control" type="text" id="su-name" placeholder="Simay Güzel" required>
+                            <div class="invalid-feedback">İsminizi giriniz.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="su-email">E-posta</label>
+                            <input class="form-control" type="email" id="su-email" placeholder="bursimemfur@example.com" required>
+                            <div class="invalid-feedback">Geçerli bir e-posta giriniz.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="su-password">Şifre</label>
+                            <div class="password-toggle">
+                                <input class="form-control" type="password" id="su-password" required>
+                                <label class="password-toggle-btn">
+                                    <input class="custom-control-input" type="checkbox"><i class="czi-eye password-toggle-indicator"></i><span class="sr-only">Şifreyi göster</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="su-password-confirm">Şifreyi</label>
+                            <div class="password-toggle">
+                                <input class="form-control" type="password" id="su-password-confirm" required>
+                                <label class="password-toggle-btn">
+                                    <input class="custom-control-input" type="checkbox"><i class="czi-eye password-toggle-indicator"></i><span class="sr-only">Şifreyi göster</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-block btn-shadow" type="submit">Kayıt ol</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar 3 Level (Light)-->
+    
+    <!-- GİRİŞ SAYFASI-->
+    <div class="container py-4 py-lg-5 my-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card border-0 box-shadow">
+                    <div class="card-body">
+                        <h2 class="h4 mb-1">Giriş Yap</h2>
+                        <div class="py-3">
+                            <h3 class="d-inline-block align-middle font-size-base font-weight-semibold mb-2 mr-2">Hesabınızı bağlayın:</h3>
+                            <div class="d-inline-block align-middle"><a class="social-btn sb-google mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Google"><i class="czi-google"></i></a><a class="social-btn sb-facebook mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Facebook"><i class="czi-facebook"></i></a><a class="social-btn sb-twitter mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Twitter"><i class="czi-twitter"></i></a></div>
+                        </div>
+                        <hr>
+                        <h3 class="font-size-base pt-4 pb-2">Ya da </h3>
+                        <form class="needs-validation" novalidate>
+                            <div class="input-group-overlay form-group">
+                                <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-mail"></i></span></div>
+                                <input class="form-control prepended-form-control" type="email" placeholder="E-posta" required>
+                            </div>
+                            <div class="input-group-overlay form-group">
+                                <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-locked"></i></span></div>
+                                <div class="password-toggle">
+                                    <input class="form-control prepended-form-control" type="password" placeholder="Şifre" required>
+                                    <label class="password-toggle-btn">
+                                        <input class="custom-control-input" type="checkbox"><i class="czi-eye password-toggle-indicator"></i><span class="sr-only">Şifreyi Göster</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-between">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" checked id="remember_me">
+                                    <label class="custom-control-label" for="remember_me">Beni Hatırla</label>
+                                </div><a class="nav-link-inline font-size-sm" href="account-password-recovery.html">Şifeni mi unuttun?</a>
+                            </div>
+                            <hr class="mt-4">
+                            <div class="text-right pt-4">
+                                <button class="btn btn-primary" type="submit"><i class="czi-sign-in mr-2 ml-n21"></i>Giriş Yap</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 pt-4 mt-3 mt-md-0">
+                <h2 class="h4 mb-3">Hesabınız yok mu? Kayıt olun</h2>
+                <p class="font-size-sm text-muted mb-4">Kayıt olarak sipariş detaylarınıza kolayca ulaşabilirsiniz.</p>
+                <form class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-fn">İsim</label>
+                                <input class="form-control" type="text" required id="reg-fn">
+                                <div class="invalid-feedback">İsminizi giriniz</div>
+                            </div>
+                        </div>
+                        <div>@Model.FirstName @Model.LastName</div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-ln">Soyisim</label>
+                                <input class="form-control" type="text" required id="reg-ln">
+                                <div class="invalid-feedback">Soyisminizi giriniz.</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-email">E-posta</label>
+                                <input class="form-control" type="email" required id="reg-email">
+                                <div class="invalid-feedback">Geçerli bir e-posta giriniz.</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-phone">Telefon Numarasır</label>
+                                <input class="form-control" type="text" required id="reg-phone">
+                                <div class="invalid-feedback">Geçerli bir telefon numarası giriniz.</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-password">Şifre</label>
+                                <input class="form-control" type="password" required id="reg-password">
+                                <div class="invalid-feedback">Şifrenizi giriniz</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-password-confirm">Şifrenizi doğrulayın</label>
+                                <input class="form-control" type="password" required id="reg-password-confirm">
+                                <div class="invalid-feedback">Şifreler uyuşmuyor!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button class="btn btn-primary" type="submit"><i class="czi-user mr-2 ml-n1"></i>Kayıt Ol</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Footer-->
+    
+    <!-- Toolbar for handheld devices-->
+    <div class="cz-handheld-toolbar">
+        <div class="d-table table-fixed w-100">
+            <a class="d-table-cell cz-handheld-toolbar-item" href="account-wishlist.html"><span class="cz-handheld-toolbar-icon"><i class="czi-heart"></i></span><span class="cz-handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell cz-handheld-toolbar-item" href="#navbarCollapse" data-toggle="collapse" onclick="window.scrollTo(0, 0)"><span class="cz-handheld-toolbar-icon"><i class="czi-menu"></i></span><span class="cz-handheld-toolbar-label">Menu</span></a><a class="d-table-cell cz-handheld-toolbar-item" href="shop-cart.html"><span class="cz-handheld-toolbar-icon"><i class="czi-cart"></i><span class="badge badge-primary badge-pill ml-1">4</span></span><span class="cz-handheld-toolbar-label">$265.00</span></a>
+        </div>
+    </div>
+    <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted font-size-sm mr-2">Top</span><i class="btn-scroll-top-icon czi-arrow-up">   </i></a>
+    <!-- JavaScript libraries, plugins and custom scripts-->
+    <script src="~/js/vendor.min.js"></script>
+    <script src="~/js/theme.min.js"></script>
+</body>
+</html>

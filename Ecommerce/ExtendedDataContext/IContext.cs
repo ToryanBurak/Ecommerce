@@ -10,9 +10,7 @@ namespace ExtendedDataContext
     public interface IContext<Context>
     {
         Context GetDataContext();
-        Context GetHistoryDataContext();
         void DestroyContext(bool? disposing = null);
         CommitDBResult CommitChanges(int userId);
-        CommitDBResult CommitChangesWithoutHistory(int userId);
     }
 }

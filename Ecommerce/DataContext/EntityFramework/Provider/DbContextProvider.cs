@@ -15,8 +15,6 @@ namespace DataContext.EntityFramework.Provider
     public class DbContextProvider : IEFContextProvider, IDisposable
     {
         private EcomDbContext _dataContext;
-        //private EcomHistoryDataContext _historyDataContext;
-        //private static readonly string connectionStringName = "EcomDataContext";
         private bool disposed = false;
 
         public static string CreateUserID = "CreateUserID";
@@ -32,16 +30,6 @@ namespace DataContext.EntityFramework.Provider
             }
         }
 
-        public EcomDbContext GetEcomDataContext()
-        {
-            return (EcomDbContext)GetDataContext();
-        }
-
-        public EcomDbContext GetEcomFeedDataContext()
-        {
-            return (EcomDbContext)GetFeedDataContext();
-        }
-
         public DbContext GetDataContext()
         {
             // TODO: Connection string icin encryption yapılacak...
@@ -51,25 +39,6 @@ namespace DataContext.EntityFramework.Provider
         }
 
         public DbContext GetFeedDataContext()
-        {
-            // TODO: Connection string icin encryption yapılacak...
-            if (_dataContext == null)
-                _dataContext = new EcomDbContext();
-
-            return _dataContext;
-        }
-
-        //public DbContext GetHistoryDataContext()
-        //{
-        //    // TODO: Connection string icin encryption yapılacak...
-        //    if (_historyDataContext == null)
-        //        _historyDataContext = new EcomHistoryDataContext(ConfigurationManager.ConnectionStrings[connectionStringName].ToString());
-
-        //    return _historyDataContext;
-        //}
-
-        //look HistoryDataContext tabloları mySql de schema olmamasından kaynaklı EcomDataContext ine dönüştürüldü.
-        public DbContext GetHistoryDataContext()
         {
             // TODO: Connection string icin encryption yapılacak...
             if (_dataContext == null)
@@ -96,8 +65,6 @@ namespace DataContext.EntityFramework.Provider
 
         public CommitDBResult CommitChanges(int UserID)
         {
-            //Look
-            //return DBContextHelper.CommitChanges(this.GetDataContext(), this.GetHistoryDataContext(), UserID);
             HistoryHelper.CommitChanges(_dataContext, UserID);
             //SaveChanges(this.GetHistoryDataContext());
             //setUpdateColumns(UserID);
@@ -184,11 +151,6 @@ namespace DataContext.EntityFramework.Provider
         {
             _dataContext.Dispose();
             _dataContext = new EcomDbContext();
-        }
-
-        DbContext IContext<DbContext>.GetHistoryDataContext()
-        {
-            throw new NotImplementedException();
         }
 
         public int SaveChanges(DbContext _dataContext)

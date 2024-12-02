@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace ExtendedDataContext.EFContext
 {
-    public interface IEFContextProvider
+    public interface IEFContextProvider : IContext<DbContext>
     {
-        public interface IEFContextProvider : IContext<DbContext>
-        {
 
-        }
     }
 }
