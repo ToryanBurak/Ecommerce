@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using BL.Store;
 using Domain.Store;
+using Domain.Store.UserLogin;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Net.Http.Headers;
+using System.Net.Mail;
 using UI.Ecommerce.Models;
 
 namespace UI.Ecommerce.Controllers
@@ -25,6 +27,50 @@ namespace UI.Ecommerce.Controllers
 
         public IActionResult Privacy()
         {
+            return View();
+        }
+
+        public IActionResult SignIn()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Register(LoginRegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                UserBL userBL = new UserBL(_mapper);
+                //RegisterResponse checkUniqeFieldResponse = userBL.CheckUniqueFieldsForRegister(model);
+                //if (checkUniqeFieldResponse.IsSuccessfull)
+                //{
+                //    Guid guid = Guid.NewGuid();
+                //    int imageUrlID = UploadFileAndGetImageUrlID(model.ImageFile, model.UserName, guid);
+                //    RegisterResponse userRegisterResponse = userBL.Register(model, imageUrlID, guid);
+                //    model.RegisterResponse = userRegisterResponse;
+                //    if (!userRegisterResponse.IsSuccessfull)
+                //    {
+                //        UserDO user = userBL.GetUserByGuid(guid);
+                //        string mail = _config.GetValue<string>("SendMailFrom:mail");
+                //        string Password = _config.GetValue<string>("SendMailFrom:password");
+                //        MimeMessage message = new MimeMessage();
+                //        MailboxAddress mailfrom = new MailboxAddress("TOR-INCar Doğrulama Kodu", mail);
+                //        MailboxAddress mailto = new MailboxAddress(user.UserName, user.Email);
+                //        message.From.Add(mailfrom);
+                //        message.To.Add(mailto);
+                //        message.Subject = "Doğrulama Kodu";
+                //        var Body = new BodyBuilder();
+                //        Body.TextBody = "Sayın " + user.UserName + ", Doğrulama Kodunuz:" + user.VerifyConfirmCode;
+                //        message.Body = Body.ToMessageBody();
+                //        SmtpClient smtp = new SmtpClient();
+                //        smtp.Connect("smtp.gmail.com", 587, false);
+                //        smtp.Authenticate(mail, Password);
+                //        smtp.Send(message);
+                //        smtp.Disconnect(true);
+                //        return View("Success", "Başarıyla Kayıt Olundu");
+                //    }
+                //}
+            }
+
             return View();
         }
         public IActionResult UserLogin()
