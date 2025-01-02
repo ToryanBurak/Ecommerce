@@ -1,4 +1,5 @@
-﻿<div class="topbar topbar-dark bg-dark">
+﻿@model Domain.Store.UserDO
+<div class="topbar topbar-dark bg-dark">
     <div class="container">
         <div class="topbar-text dropdown d-md-none">
             <ul class="dropdown-menu">
@@ -32,12 +33,23 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button><a class="navbar-tool navbar-stuck-toggler" href="#">
                     <span class="navbar-tool-tooltip">Menü</span>
                     <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-menu"></i></div>
-                </a><a class="navbar-tool d-none d-lg-flex" href="account-wishlist.html">
-                    <span class="navbar-tool-tooltip">Favorilerim</span>
                     <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-heart"></i></div>
                 </a><a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="#signin-modal" data-toggle="modal">
                     <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
-                    <div class="navbar-tool-text ml-n3"><small>Hoş geldiniz, giriş yapın</small>Hesabım</div>
+
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a class="navbar-tool-text ml-n3" href="@Url.Action("SignIn", "Home")">
+                            <small>Hoş geldiniz, giriş yapın</small>Giriş yap
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="navbar-tool-text ml-n3" href="@Url.Action("Index", "User")">
+                            <small>Hesap</small>@Model.FirstName @Model.LastName
+                        </a>
+                    }
+
                 </a>
                 <div class="navbar-tool dropdown ml-3">
                     <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html"><span class="navbar-tool-label">4</span><i class="navbar-tool-icon czi-cart"></i></a><a class="navbar-tool-text" href="shop-cart.html"><small>Sepetim</small>2.000₺</a>
@@ -55,36 +67,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="widget-cart-item py-2 border-bottom">
-                                    <button class="close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                                    <div class="media align-items-center">
-                                        <a class="d-block mr-2" href="shop-single-v1.html"><img width="64" src="~/img/shop/cart/widget/02.jpg" alt="Product" /></a>
-                                        <div class="media-body">
-                                            <h6 class="widget-product-title"><a href="shop-single-v1.html">TH Jeans City Backpack</a></h6>
-                                            <div class="widget-product-meta"><span class="text-accent mr-2">$79.<small>50</small></span><span class="text-muted">x 1</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="widget-cart-item py-2 border-bottom">
-                                    <button class="close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                                    <div class="media align-items-center">
-                                        <a class="d-block mr-2" href="shop-single-v1.html"><img width="64" src="~/img/shop/cart/widget/03.jpg" alt="Product" /></a>
-                                        <div class="media-body">
-                                            <h6 class="widget-product-title"><a href="shop-single-v1.html">3-Color Sun Stash Hat</a></h6>
-                                            <div class="widget-product-meta"><span class="text-accent mr-2">$22.<small>50</small></span><span class="text-muted">x 1</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="widget-cart-item py-2 border-bottom">
-                                    <button class="close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                                    <div class="media align-items-center">
-                                        <a class="d-block mr-2" href="shop-single-v1.html"><img width="64" src="~/img/shop/cart/widget/04.jpg" alt="Product" /></a>
-                                        <div class="media-body">
-                                            <h6 class="widget-product-title"><a href="shop-single-v1.html">Cotton Polo Regular Fit</a></h6>
-                                            <div class="widget-product-meta"><span class="text-accent mr-2">$9.<small>00</small></span><span class="text-muted">x 1</span></div>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
                                 <div class="font-size-sm mr-2 py-2"><span class="text-muted">Subtotal:</span><span class="text-accent font-size-base ml-1">$265.<small>00</small></span></div><a class="btn btn-outline-secondary btn-sm" href="shop-cart.html">Expand cart<i class="czi-arrow-right ml-1 mr-n1"></i></a>
@@ -120,28 +103,6 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="mega-dropdown-column pt-4 px-3">
-                                    <div class="widget widget-links">
-                                        <a class="d-block overflow-hidden rounded-lg mb-3" href="#"><img src="~/img/shop/departments/02.jpg" alt="Ayakkabı" /></a>
-                                        <h6 class="font-size-base mb-2">Ayakkabu</h6>
-                                        <ul class="widget-list">
-                                            <li class="widget-list-item"><a class="widget-list-link" href="#">Kadın</a></li>
-                                            <li class="widget-list-item"><a class="widget-list-link" href="#">Erkek</a></li>
-                                            <li class="widget-list-item"><a class="widget-list-link" href="#">Çocuk</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="mega-dropdown-column pt-4 px-3">
-                                    <div class="widget widget-links">
-                                        <a class="d-block overflow-hidden rounded-lg mb-3" href="#"><img src="~/img/shop/departments/03.jpg" alt="teknoloji" /></a>
-                                        <h6 class="font-size-base mb-2">Teknoloji</h6>
-                                        <ul class="widget-list">
-                                            <li class="widget-list-item"><a class="widget-list-link" href="#">Telefonlar &amp; Tabletler</a></li>
-                                            <li class="widget-list-item"><a class="widget-list-link" href="#">Giyilebilir Teknoloji</a></li>
-
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                             <div class="d-flex flex-wrap flex-md-nowrap">
                                 <div class="mega-dropdown-column pt-4 px-3">
@@ -152,28 +113,6 @@
                                             <li class="widget-list-item"><a class="widget-list-link" href="#">Mobilya</a></li>
 
                                             <li class="widget-list-item"><a class="widget-list-link" href="#">Dekorasyon</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="mega-dropdown-column pt-4 px-3">
-                                    <div class="widget widget-links">
-                                        <a class="d-block overflow-hidden rounded-lg mb-3" href="#"><img src="~/img/shop/departments/05.jpg" alt="aksesuar" /></a>
-                                        <h6 class="font-size-base mb-2">Aksesuar</h6>
-                                        <ul class="widget-list">
-                                            <li class="widget-list-item"><a class="widget-list-link" href="#">Şapka</a></li>
-                                            <li class="widget-list-item"><a class="widget-list-link" href="#">Güneş Gözlüğü</a></li>
-                                            <li class="widget-list-item"><a class="widget-list-link" href="#">Çanta</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="mega-dropdown-column pt-4 px-3">
-                                    <div class="widget widget-links">
-                                        <a class="d-block overflow-hidden rounded-lg mb-3" href="#"><img src="~/img/shop/departments/06.jpg" alt="Diğer" /></a>
-                                        <h6 class="font-size-base mb-2">Diğer</h6>
-                                        <ul class="widget-list">
-                                            <li class="widget-list-item"><a class="widget-list-link" href="#">Oyuncak</a></li>
-
-                                            <li class="widget-list-item"><a class="widget-list-link" href="#">Kamp Malzemeleri</a></li>
                                         </ul>
                                     </div>
                                 </div>

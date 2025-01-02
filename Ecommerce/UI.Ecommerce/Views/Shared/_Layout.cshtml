@@ -18,10 +18,6 @@
     <script src="~/js/theme.min.js"></script>
 </head>
 <body>
-    @if (User.Identity.IsAuthenticated && (User.FindFirst(System.Security.Claims.ClaimTypes.Role).Value.ToString() == "User") && (User.FindFirst("User.ConfirmState").Value.ToString() == "false"))
-    {
-        @Html.ActionLink("", "VerifyConfirmCode", "User")
-    }
     <header class="header">
         <div class="container-fluid">
             @await Component.InvokeAsync("Navbar")
@@ -30,96 +26,80 @@
     @RenderBody()
 
     <footer class="bg-dark pt-5">
-      <div class="container">
-        <div class="row pb-2">
-          <div class="col-md-4 col-sm-6">
-            <div class="widget widget-links widget-light pb-2 mb-4">
-              <h3 class="widget-title text-light">Kategoriler</h3>
-              <ul class="widget-list">
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Giyim</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Ayakkabı</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Teknoloji</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Ev</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Aksesuar</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Diğer</a></li>
-                 </ul>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6">
-            <div class="widget widget-links widget-light pb-2 mb-4">
-              <h3 class="widget-title text-light">Hesap ve Sipariş</h3>
-              <ul class="widget-list">
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Hesabım</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Sipariş Takibi</a></li>
-              </ul>
-                
-            </div>
-        
-          </div>
-          <div class="col-md-4">
-            <div class="widget pb-2 mb-4">
-              <h3 class="widget-title text-light pb-1">Bizden Haberdar Ol!</h3>
-              <form class="validate" action="https://studio.us12.list-manage.com/subscribe/post-json?u=c7103e2c981361a6639545bd5&amp;amp;id=29ca296126&amp;c=?" method="get" name="mc-embedded-subscribe-form" id="mc-embedded-subscribe-form">
-                <div class="input-group input-group-overlay flex-nowrap">
-                  <div class="input-group-prepend-overlay"><span class="input-group-text text-muted font-size-base"><i class="czi-mail"></i></span></div>
-                  <input class="form-control prepended-form-control" type="email" name="EMAIL" id="mce-EMAIL" value="" placeholder="E-posta Adresiniz" required>
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit" name="subscribe" id="mc-embedded-subscribe">Abone Ol*</button>
-                  </div>
-                </div>
-                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  <input type="text" name="b_c7103e2c981361a6639545bd5_29ca296126" tabindex="-1">
-                </div><small class="form-text text-light opacity-50" id="mc-helper">*Erkenden indirimlerden, yeni ürünlerden ilk siz haberdar olmak için e-posta bültenimize abone olun.</small>
-                <div class="subscribe-status"></div>
-              </form>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-      <div class="pt-5 bg-darker">
         <div class="container">
-          <div class="row pb-3">
-            <div class="col-md-3 col-sm-6 mb-4">
-              <div class="media"><i class="czi-rocket text-primary" style="font-size: 2.25rem;"></i>
-                <div class="media-body pl-3">
-                  <h6 class="font-size-base text-light mb-1">Hızlı ve ücretsiz teslimat</h6>
-                 
+            <div class="row pb-2">
+                <div class="col-md-4 col-sm-6">
+                    <div class="widget widget-links widget-light pb-2 mb-4">
+                        <h3 class="widget-title text-light">Kategoriler</h3>
+                        <ul class="widget-list">
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Giyim</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Ayakkabı</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Teknoloji</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Ev</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Aksesuar</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Diğer</a></li>
+                        </ul>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-6 mb-4">
-              <div class="media"><i class="czi-currency-exchange text-primary" style="font-size: 2.25rem;"></i>
-                <div class="media-body pl-3">
-                  <h6 class="font-size-base text-light mb-1">İade garantisi</h6>
-                 
+                <div class="col-md-4 col-sm-6">
+                    <div class="widget widget-links widget-light pb-2 mb-4">
+                        <h3 class="widget-title text-light">Hesap ve Sipariş</h3>
+                        <ul class="widget-list">
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Hesabım</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Sipariş Takibi</a></li>
+                        </ul>
+
+                    </div>
+
                 </div>
-              </div>
             </div>
-            <div class="col-md-3 col-sm-6 mb-4">
-              <div class="media"><i class="czi-support text-primary" style="font-size: 2.25rem;"></i>
-                <div class="media-body pl-3">
-                  <h6 class="font-size-base text-light mb-1">7/24 Destek</h6>
-                 
+        </div>
+        <div class="pt-5 bg-darker">
+            <div class="container">
+                <div class="row pb-3">
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="media">
+                            <i class="czi-rocket text-primary" style="font-size: 2.25rem;"></i>
+                            <div class="media-body pl-3">
+                                <h6 class="font-size-base text-light mb-1">Hızlı ve ücretsiz teslimat</h6>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="media">
+                            <i class="czi-currency-exchange text-primary" style="font-size: 2.25rem;"></i>
+                            <div class="media-body pl-3">
+                                <h6 class="font-size-base text-light mb-1">İade garantisi</h6>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="media">
+                            <i class="czi-support text-primary" style="font-size: 2.25rem;"></i>
+                            <div class="media-body pl-3">
+                                <h6 class="font-size-base text-light mb-1">7/24 Destek</h6>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="media">
+                            <i class="czi-card text-primary" style="font-size: 2.25rem;"></i>
+                            <div class="media-body pl-3">
+                                <h6 class="font-size-base text-light mb-1">Güvenilir Ödeme</h6>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-6 mb-4">
-              <div class="media"><i class="czi-card text-primary" style="font-size: 2.25rem;"></i>
-                <div class="media-body pl-3">
-                  <h6 class="font-size-base text-light mb-1">Güvenilir Ödeme</h6>
-              
+                <hr class="hr-light pb-4 mb-3">
+                <div class="row pb-2">
+
                 </div>
-              </div>
+
             </div>
-          </div>
-          <hr class="hr-light pb-4 mb-3">
-          <div class="row pb-2">
-         
-            </div>
-         
-      </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

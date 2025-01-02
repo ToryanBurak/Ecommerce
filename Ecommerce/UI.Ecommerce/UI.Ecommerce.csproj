@@ -9,11 +9,13 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="MailKit" Version="4.7.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.36" />
+    <PackageReference Include="MimeKit" Version="4.7.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BL.Store\BL.Store.csproj" />
-    <ProjectReference Include="..\Domain.Backoffice\Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using BL;
+using BL.Store;
+using DataContext.EntityFramework;
+using Domain.Store;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -17,7 +20,13 @@ namespace UI2.ViewComponents.Navbar
         [HttpGet]
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View();
+            UserDO user = new UserDO();
+            UserBL userBL = new UserBL(_mapper);
+            if (User.Identity.IsAuthenticated)
+            {
+                user = userBL.GetUserByGuid(new Guid(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value));
+            }
+            return View(user);
         }
     }
 }

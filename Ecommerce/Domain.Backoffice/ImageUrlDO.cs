@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Backoffice
 {
-    public class ProductDO
+    public class ImageUrlDO
     {
-        public int ID { get; set; }
-
-        public string Name { get; set; }
+        public int Id { get; set; }
+        public string Url { get; set; } = null!;
     }
 }

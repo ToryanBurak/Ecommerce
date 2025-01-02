@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using BL.Store;
 using Domain.Store;
+using Domain.Store.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using UI.Ecommerce.Extensions;
 
 namespace UI.Ecommerce.Controllers
 {
@@ -23,6 +25,30 @@ namespace UI.Ecommerce.Controllers
         public IActionResult ConfirmMail()
         {
             return View();
+        }
+        [Authorize]
+        [HttpGet]
+        public IActionResult VerifyConfirmCode()
+        {
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public IActionResult VerifyConfirmCode(string code)
+        {
+            UserBL userBL = new UserBL(_mapper);
+            UserDO user = userBL.GetUserByGuid(new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            if (user.VerifyConfirmCode == code)
+            {
+                userBL.UpdateUserVerifyState(user.Id, VerifyStateEnum.Verified);
+                IdentityHelper.Login(user, this.HttpContext);
+                return View("Success", "Doğrulama Başarılı");
+            }
+            else
+            {
+                return View("Error", "Doğrulama Başarısız.Kodu Tekrar Kontrol Edin");
+            }
+
         }
         //[HttpGet]
         //public IActionResult ForgetPasswordWithMail()
@@ -141,30 +167,6 @@ namespace UI.Ecommerce.Controllers
         //{
         //    IdentityHelper.Logout(this.HttpContext);
         //    return RedirectToAction("Index", "Home");
-        //}
-        //[Authorize]
-        //[HttpGet]
-        //public IActionResult VerifyConfirmCode()
-        //{
-        //    return View();
-        //}
-        //[Authorize]
-        //[HttpPost]
-        //public IActionResult VerifyConfirmCode(string code)
-        //{
-        //    UserBL userBL = new UserBL(_mapper);
-        //    UserDO user = userBL.GetUserByGuid(new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier)));
-        //    if (user.VerifyConfirmCode == code)
-        //    {
-        //        userBL.UpdateUserVerifyState(user.ID, RentACar.Global.Enums.VerifyStateEnum.Verified);
-        //        IdentityHelper.Login(user, this.HttpContext);
-        //        return View("Success", "Doğrulama Başarılı");
-        //    }
-        //    else
-        //    {
-        //        return View("Error", "Doğrulama Başarısız.Kodu Tekrar Kontrol Edin");
-        //    }
-
         //}
 
         //public IActionResult Wallet()

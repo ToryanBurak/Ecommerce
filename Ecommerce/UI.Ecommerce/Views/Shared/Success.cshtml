@@ -1,0 +1,9 @@
+﻿@model string
+<div class="row">
+    <div class="col text-center">
+        <h1 class="text-danger text-center"><i class="fa-solid fa-circle-check fa-3x" style="color: #11ff00;"></i></h1>
+        <h2 class="text-center">İlginiz İçin Teşekkür ederiz.</h2>
+        <h3 class="text-center">@Model.ToString()</h3>
+        <a asp-action="Index" asp-controller="Home" class="text-center btn btn-outline-success">Anasayfaya Dön</a>
+    </div>
+</div>

@@ -61,9 +61,9 @@ namespace DataContext.EntityFramework.Provider
             }
         }
 
-        public CommitDBResult CommitChanges(int UserID)
+        public CommitDBResult CommitChanges()
         {
-            HistoryHelper.CommitChanges(_dataContext, UserID);
+            HistoryHelper.CommitChanges(_dataContext);
             CommitDBResult commitDBResult = CommitDBResult.Success;
             return commitDBResult;
         }

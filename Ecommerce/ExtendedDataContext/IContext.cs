@@ -11,6 +11,6 @@ namespace ExtendedDataContext
     {
         Context GetDataContext();
         void DestroyContext(bool? disposing = null);
-        CommitDBResult CommitChanges(int userId);
+        CommitDBResult CommitChanges();
     }
 }

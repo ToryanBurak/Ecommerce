@@ -1,0 +1,100 @@
+﻿@model Domain.Store.UserDO
+<link rel="stylesheet" href="~/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="~/plugins/fontawesome/css/fontawesome.min.css">
+<link rel="stylesheet" href="~/plugins/fontawesome/css/all.min.css">
+
+<link rel="stylesheet" href="~/plugins/select2/css/select2.min.css">
+
+<link rel="stylesheet" href="~/css/bootstrap-datetimepicker.min.css">
+
+<link rel="stylesheet" href="~/plugins/aos/aos.css">
+
+<link rel="stylesheet" href="~/css/feather.css">
+
+<link rel="stylesheet" href="~/css/owl.carousel.min.css">
+
+<link rel="stylesheet" href="~/css/style.css">
+<nav class="navbar navbar-expand-lg header-nav">
+    <div class="navbar-header">
+        <a id="mobile_btn" href="javascript:void(0);">
+            <span class="bar-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </a>
+        <a href="@Url.Action("Index","Home")" class="navbar-brand logo">
+            <img src="~/img/logo.svg" class="img-fluid" alt="Logo">
+        </a>
+        <a href="@Url.Action("Index","Home")" class="navbar-brand logo-small">
+            <img src="~/img/logo-small.png" class="img-fluid" alt="Logo">
+        </a>
+    </div>
+    <div class="main-menu-wrapper">
+        <div class="menu-header">
+            <a href="@Url.Action("Index","Home")" class="menu-logo">
+                <img src="~/img/logo.svg" class="img-fluid" alt="Logo">
+            </a>
+            <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                <i class="fas fa-times"></i>
+            </a>
+        </div>
+    </div>
+
+</nav>
+<body>
+
+    <div class="main-wrapper login-body">
+
+        <header class="log-header">
+            <a href="@Url.Action("Login","User")"><img class="img-fluid logo-dark" src="~/img/logo.svg" alt="Logo"></a>
+        </header>
+
+        <div class="login-wrapper">
+            <div class="loginbox">
+                <div class="login-auth">
+                    <div class="login-auth-wrap">
+                        <h4>Hesabınıza Giriş Yapmak için Mailinize Gelen Doğrulama Kodunu Giriniz</h4>
+                        <form method="post" asp-action="VerifyConfirmCode" asp-controller="User" enctype="multipart/form-data">
+                            <div class="input-block">
+                                <label class="form-label">Doğrulama Kodu <span class="text-danger">*</span></label>
+                                <input type="text" name="code" class="form-control" placeholder="Doğrulama Kodunu Giriniz">
+                            </div>
+                            <button type="submit" class="btn btn-outline-light w-100 btn-size mt-1">Doğrula</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/jquery-3.7.1.min.js" type="83bde751fc55870a3b246352-text/javascript"></script>
+
+    <script src="~/js/bootstrap.bundle.min.js" type="83bde751fc55870a3b246352-text/javascript"></script>
+
+    <script src="~/js/script.js" type="83bde751fc55870a3b246352-text/javascript"></script>
+    <script src="~/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="83bde751fc55870a3b246352-|49" defer=""></script>
+</body>
+
+<script data-cfasync="false" src="~/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="~/js/jquery-3.7.1.min.js" type="b9a3d4979c37c310c81b635b-text/javascript"></script>
+
+<script src="~/js/bootstrap.bundle.min.js" type="b9a3d4979c37c310c81b635b-text/javascript"></script>
+
+<script src="~/js/jquery.waypoints.js" type="b9a3d4979c37c310c81b635b-text/javascript"></script>
+<script src="~/js/jquery.counterup.min.js" type="b9a3d4979c37c310c81b635b-text/javascript"></script>
+
+<script src="~/plugins/select2/js/select2.min.js" type="b9a3d4979c37c310c81b635b-text/javascript"></script>
+
+<script src="~/plugins/aos/aos.js" type="b9a3d4979c37c310c81b635b-text/javascript"></script>
+
+<script src="~/js/backToTop.js" type="b9a3d4979c37c310c81b635b-text/javascript"></script>
+
+<script src="~/plugins/moment/moment.min.js" type="b9a3d4979c37c310c81b635b-text/javascript"></script>
+<script src="~/js/bootstrap-datetimepicker.min.js" type="b9a3d4979c37c310c81b635b-text/javascript"></script>
+
+<script src="~/js/owl.carousel.min.js" type="b9a3d4979c37c310c81b635b-text/javascript"></script>
+
+<script src="~/js/script.js" type="b9a3d4979c37c310c81b635b-text/javascript"></script>
+<script src="~/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+        data-cf-settings="b9a3d4979c37c310c81b635b-|49" defer=""></script>

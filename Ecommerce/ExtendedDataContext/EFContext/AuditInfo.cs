@@ -41,64 +41,9 @@ namespace ExtendedDataContext.EFContext
 
         #endregion Fields
 
-        public AuditInfo(DbContext dataContext, int userId)
+        public AuditInfo(DbContext dataContext)
         {
             this.dataContext = dataContext;
-            this.userId = userId;
-        }
-
-        private void setDateTimeProperty(object tableName, string propertyName, DateTime propertyValue, DbContext dbContext, bool nullCheck = false)
-        {
-            dbContext.ChangeTracker.DetectChanges();
-            EntityEntry? property = dbContext.ChangeTracker.Entries().FirstOrDefault(x => x.Entity.GetType().Name == tableName);
-            if (property != null)
-            {
-                bool haveProperty = property.CurrentValues.Properties.Any(s => s.Name == propertyName);
-                if (haveProperty)
-                {
-                    if (nullCheck == true)
-                    {
-                        dbContext.ChangeTracker.Entries().FirstOrDefault(x => x.Entity.GetType().Name == tableName).CurrentValues[propertyName] = propertyValue;
-                    }
-                    else
-                    {
-                        dbContext.ChangeTracker.Entries().FirstOrDefault(x => x.Entity.GetType().Name == tableName).CurrentValues[propertyName] = propertyValue;
-                    }
-                }
-            }
-
-        }
-        private void setIntProperty(object tableName, string propertyName, int propertyValue, DbContext dbContext)
-        {
-            EntityEntry? property = dbContext.ChangeTracker.Entries().FirstOrDefault(x => x.Entity.GetType().Name == tableName);
-            if (property != null)
-            {
-                bool haveProperty = property.CurrentValues.Properties.Any(s => s.Name == propertyName);
-                if (haveProperty)
-                {
-                    dbContext.ChangeTracker.Entries().FirstOrDefault(x => x.Entity.GetType().Name == tableName).CurrentValues[propertyName] = propertyValue;
-                }
-            }
-
-
-        }
-
-        public void setUpdateColumns()
-        {
-            var changes = dataContext.ChangeTracker.Entries();
-
-            foreach (object item in changes.Where(p => p.State == EntityState.Modified))
-            {
-                setIntProperty(item, UpdateUserID, userId, dataContext);
-                setDateTimeProperty(item, UpdateTime, DateTime.UtcNow, dataContext, false);
-            }
-            foreach (object item in changes.Where(p => p.State == EntityState.Added))
-            {
-                setIntProperty(item, UpdateUserID, userId, dataContext);
-                setDateTimeProperty(item, UpdateTime, DateTime.UtcNow, dataContext, true);
-                setIntProperty(item, CreateUserID, userId, dataContext);
-                setDateTimeProperty(item, CreateTime, DateTime.UtcNow, dataContext, true);
-            }
         }
     }
 }
