@@ -5,6 +5,12 @@ namespace DataContext.EntityFramework
 {
     public partial class User
     {
+        public User()
+        {
+            Addresses = new HashSet<Address>();
+            Orders = new HashSet<Order>();
+        }
+
         public int Id { get; set; }
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
@@ -16,5 +22,8 @@ namespace DataContext.EntityFramework
         public string SaltString { get; set; } = null!;
         public Guid Guid { get; set; }
         public bool IsAdmin { get; set; }
+
+        public virtual ICollection<Address> Addresses { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using BL.Backoffice;
 using Domain.Backoffice;
 using Domain.Backoffice.UserLogin;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using UI.BackOffice.Extensions;
@@ -22,9 +23,16 @@ namespace UI.BackOffice.Controllers
 
         public IActionResult Index()
         {
-            ImageUrlBL imageUrlBL = new ImageUrlBL(_mapper);
-            ImageUrlDO imageUrl = imageUrlBL.GetFirst();
-            return View(imageUrl);
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            else
+            {
+                LoginViewModel loginViewModel = new LoginViewModel();
+                return View("Login",loginViewModel);
+            }
+           
         }
 
         public IActionResult Privacy()
@@ -63,6 +71,12 @@ namespace UI.BackOffice.Controllers
                 return View(model);
             }
 
+        }
+        [Authorize]
+        public IActionResult LogOut()
+        {
+            IdentityHelper.Logout(this.HttpContext);
+            return RedirectToAction("Index", "Home");
         }
 
     }
