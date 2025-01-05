@@ -23,7 +23,8 @@ namespace UI.BackOffice.Controllers
 
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
+            int a = 5;
+             if (User.Identity.IsAuthenticated)
             {
                 return View();
             }
