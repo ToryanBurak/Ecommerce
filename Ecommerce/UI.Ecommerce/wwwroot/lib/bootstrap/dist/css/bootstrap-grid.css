@@ -5,7 +5,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 .container,
-.container-fluid,
 .container-xxl,
 .container-xl,
 .container-lg,
@@ -17,6 +16,16 @@
   margin-right: auto;
   margin-left: auto;
 }
+
+.container-fluid {
+
+  width: 100%;
+
+  margin-right: auto;
+  margin-left: auto;
+
+}
+
 
 @media (min-width: 576px) {
   .container-sm, .container {

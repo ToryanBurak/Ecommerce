@@ -617,7 +617,6 @@ progress {
 }
 
 .container,
-.container-fluid,
 .container-xxl,
 .container-xl,
 .container-lg,
@@ -629,6 +628,13 @@ progress {
   margin-right: auto;
   margin-left: auto;
 }
+.container-fluid {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+
+}
+
 
 @media (min-width: 576px) {
   .container-sm, .container {

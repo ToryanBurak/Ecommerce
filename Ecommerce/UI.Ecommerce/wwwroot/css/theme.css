@@ -590,7 +590,12 @@ pre code {
     }
 }
 
-.container-fluid,
+.container-fluid {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto
+
+}
 .container-xl {
     width: 100%;
     padding-right: 15px;
