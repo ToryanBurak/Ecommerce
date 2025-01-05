@@ -1,0 +1,33 @@
+﻿@model List<Domain.Backoffice.ProductDO>
+
+<div class="container mt-5">
+    <h2 class="text-center">Ürün Listesi</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>İsim</th>
+                <th>Resim</th>
+                <th>Fiyat</th>
+                <th>Kategori</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td><img src="@product.ImageUrl" alt="@product.Name" class="img-fluid" style="width: 150px; height: 150px;" /></td>
+                    <td>@product.Amount</td>
+                    <td>@UI.BackOffice.Helper.SelectHelper.GetCategoryNameById(product.CategoryId).ToString()</td>
+                    <td>
+                        <a href="@Url.Action("EditCategory", "Home", new { id = product.Id })" class="btn btn-warning btn-sm">Düzenle</a>
+                        <a href="@Url.Action("DeleteCategory", "Home", new { id = product.Id })" class="btn btn-danger btn-sm">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

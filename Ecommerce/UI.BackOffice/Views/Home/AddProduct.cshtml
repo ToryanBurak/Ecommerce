@@ -1,0 +1,26 @@
+﻿@model Domain.Backoffice.ProductViewModel
+@{
+    ViewData["Title"] = "Dosya Yükle";
+}
+
+<h2>Kategori Ekle</h2>
+
+<form method="post" asp-action="AddProduct" asp-controller="Home" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="text" class="form-label">İsim</label>
+        <input type="text" name="Name" class="form-control" asp-for="Name" required id="reg-fn">
+    </div>
+    <div class="mb-3">
+        <label for="text" class="form-label">Fiyat</label>
+        <input type="number" name="Amount" class="form-control" asp-for="Amount" required id="reg-fn">
+    </div>
+    <div class="mb-3">
+        <label for="text" class="form-label">Kategori</label>
+        @Html.DropDownListFor(x => x.CategoryId, UI.BackOffice.Helper.SelectHelper.GetCategoryList(), new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="file">Resim Seçin</label>
+        <input type="file" asp-for="Image" name="Image" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Yükle</button>
+</form>

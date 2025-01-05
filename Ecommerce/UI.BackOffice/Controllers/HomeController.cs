@@ -103,6 +103,36 @@ namespace UI.BackOffice.Controllers
             return View(categoryList);
         }
         [Authorize]
+        public IActionResult ProductList()
+        {
+            ProductBL productBL = new ProductBL(_mapper);
+            List<ProductDO> productList = productBL.GetAll();
+            ImageUrlBL imageUrlBL = new ImageUrlBL(_mapper);
+            CategoryBL categoryBL = new CategoryBL(_mapper);
+            foreach (ProductDO product in productList)
+            {
+                product.ImageUrl = imageUrlBL.GetImageUrlById(product.ImageUrlId);
+            }
+            return View(productList);
+        }
+        [Authorize]
+        public IActionResult AddProduct()
+        {
+            ProductViewModel categoryViewModel = new ProductViewModel();
+            return View(categoryViewModel);
+        }
+        [Authorize]
+        [HttpPost]
+        public IActionResult AddProduct(ProductViewModel productViewModel)
+        {
+            ProductBL productBL = new ProductBL(_mapper);
+            int imageUrlId = UploadImageAndImageUrlId(productViewModel.Image, FtpDirectoryEnum.Product);
+            productViewModel.ImageUrlId = imageUrlId;
+            ProductDO productToAdd = _mapper.Map<ProductDO>(productViewModel);
+            productBL.AddProduct(productToAdd);
+            return RedirectToAction("ProductList");
+        }
+        [Authorize]
         public IActionResult AddCategory()
         {
             CategoryViewModel categoryViewModel = new CategoryViewModel();
