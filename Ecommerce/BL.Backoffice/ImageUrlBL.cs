@@ -6,8 +6,10 @@ using Repository.EFContextRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace BL.Backoffice
 {
@@ -26,9 +28,34 @@ namespace BL.Backoffice
                 return _mapper.Map<List<ImageUrl>, List<ImageUrlDO>>(imageRepository.GetAll().ToList());
             }
         }
-        public ImageUrlDO GetFirst()
+        public string GetImageUrlById(int id)
         {
-            return GetAll().First();
+            ImageUrlDO imageUrl = GetAll().FirstOrDefault(x=>x.Id == id);
+            return imageUrl != null ? imageUrl.Url : String.Empty;
+        }
+        public int GetImageIdByGuid(Guid guid)
+        {
+            ImageUrlDO imageUrl = GetAll().FirstOrDefault(x => x.Guid == (Guid)guid);
+            return imageUrl != null ? imageUrl.Id : 0;
+        }
+
+        public int UploadImageAndGetId(string imageurl)
+        {
+            using (DbContextProvider dcp = new DbContextProvider())
+            {
+                Guid generateGuid = Guid.NewGuid();
+                ImageUrl dbObject = new ImageUrl()
+                {
+                    Url = imageurl,
+                    Guid = generateGuid
+                };
+                Repository<ImageUrl> imageRepository = new Repository<ImageUrl>(dcp);
+                imageRepository.InsertOnSubmit(dbObject);
+                dcp.CommitChanges();
+                int id = GetImageIdByGuid(generateGuid);
+                return id;
+            }
+            
         }
     }
 }

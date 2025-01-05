@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DataContext.EntityFramework;
 using Domain.Backoffice;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace BL.Backoffice
 {
     public class BLInitializer :Profile
     {
-        public void Initialize()
+        public BLInitializer()
         {
             InitializeAutoMapper();
         }
@@ -20,8 +21,7 @@ namespace BL.Backoffice
         {
             CreateMap<UserDO, User>().ReverseMap();
             CreateMap<ImageUrl, ImageUrlDO>().ReverseMap();
+            CreateMap<Category, CategoryDO>().ForMember(dest => dest.Url, opt => opt.Ignore()).ReverseMap();
         }
-
-
     }
 }

@@ -13,6 +13,7 @@ namespace DataContext.EntityFramework
 
         public int Id { get; set; }
         public string Url { get; set; } = null!;
+        public Guid? Guid { get; set; }
 
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Product> Products { get; set; }

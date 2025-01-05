@@ -1,0 +1,28 @@
+﻿@model List<Domain.Backoffice.UserDO>
+
+<div class="container mt-5">
+    <h2 class="text-center">Müşteri Listesi</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Ad Soyad</th>
+                <th>Email</th>
+                <th>Telefon</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                string userType = customer.IsAdmin == true ? "Admin" : "User";
+                <tr>
+                    <td>@customer.Id</td>
+                    <td>@customer.FirstName @customer.LastName (@userType)</td>
+                    <td>@customer.Email</td>
+                    <td>@customer.Phone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

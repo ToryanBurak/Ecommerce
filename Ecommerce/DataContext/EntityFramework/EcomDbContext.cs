@@ -67,6 +67,7 @@ namespace DataContext.EntityFramework
                 entity.HasOne(d => d.ImageUrl)
                     .WithMany(p => p.Categories)
                     .HasForeignKey(d => d.ImageUrlId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Category_ImageUrl");
             });
 

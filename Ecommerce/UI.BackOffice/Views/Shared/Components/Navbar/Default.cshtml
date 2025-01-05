@@ -92,10 +92,10 @@
             <span class="icon bi bi-list-ul"></span> <span class="text">Kategoriler</span>
         </a>
         <div class="collapse ps-3" id="categories">
-            <a href="/Categories/Add" class="nav-link">Kategori Ekle</a>
-            <a href="/Categories/List" class="nav-link">Kategorileri Göster</a>
+            <a href="@Url.Action("AddCategory","Home")" class="nav-link">Kategori Ekle</a>
+            <a href="@Url.Action("CategoryList","Home")" class="nav-link">Kategorileri Göster</a>
         </div>
-        <a href="@Url.Action("Logout","Home")" class="nav-link">
+        <a href="@Url.Action("CustomerList","Home")" class="nav-link">
             <span class="icon bi bi-people"></span> <span class="text">Müşteriler</span>
         </a>
         <a href="/Sales" class="nav-link">
