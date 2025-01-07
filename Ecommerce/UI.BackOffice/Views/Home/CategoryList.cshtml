@@ -17,7 +17,7 @@
                 <tr>
                     <td>@category.Id</td>
                     <td>@category.Name</td>
-                    <td><img src="@category.Url" alt="@category.Name" class="img-fluid" style="width: 150px; height: 150px;"/></td>
+                    <td><img src="@category.ImageUrl.Url" alt="@category.Name" class="img-fluid" style="width: 150px; height: 150px;"/></td>
                     <td>
                         <a href="@Url.Action("EditCategory", "Home", new { id = category.Id })" class="btn btn-warning btn-sm">Düzenle</a>
                         <a href="@Url.Action("DeleteCategory", "Home", new { id = category.Id })" class="btn btn-danger btn-sm">Sil</a>

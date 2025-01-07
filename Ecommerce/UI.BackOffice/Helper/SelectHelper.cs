@@ -1,6 +1,8 @@
 ﻿using BL.Backoffice;
 using Domain.Backoffice;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace UI.BackOffice.Helper
 {
@@ -21,6 +23,25 @@ namespace UI.BackOffice.Helper
             var mapper = StaticMapper.Mapper;
             CategoryBL categoryBL = new CategoryBL(mapper);
             return categoryBL.GetAll().FirstOrDefault(x => x.Id == id).Name;
+        }
+
+        public static string GetDescriptionFromEnumValue<TEnum>(int value) where TEnum : Enum
+        {
+            var enumValue = (TEnum)(object)value;
+
+            var fieldInfo = enumValue.GetType().GetField(enumValue.ToString());
+            if (fieldInfo != null)
+            {
+                var descriptionAttribute = fieldInfo
+                    .GetCustomAttributes(typeof(DescriptionAttribute), false)
+                    .FirstOrDefault() as DescriptionAttribute;
+
+                if (descriptionAttribute != null)
+                {
+                    return descriptionAttribute.Description;
+                }
+            }
+            return enumValue.ToString();
         }
     }
 }

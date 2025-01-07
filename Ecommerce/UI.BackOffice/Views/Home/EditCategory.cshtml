@@ -1,0 +1,24 @@
+﻿@model Domain.Backoffice.CategoryDO
+@{
+    ViewData["Title"] = "Dosya Yükle";
+}
+
+<h2>Ürün Ekle</h2>
+
+<form method="post" asp-action="EditCategory" asp-controller="Home" enctype="multipart/form-data">
+    <input type="hidden" asp-for="ImageUrlId" name="ImageUrlId" />
+    <input type="hidden" asp-for="IsActive" name="IsActive" />
+    <div class="mb-3">
+        <label for="text" class="form-label">ID</label>
+        <input type="text" name="Id" class="form-control" disabled="disabled" asp-for="Id" required id="reg-fn">
+    </div>
+    <div class="mb-3">
+        <label for="text" class="form-label">İsim</label>
+        <input type="text" name="Name" class="form-control" asp-for="Name" required id="reg-fn">
+    </div>
+    <div class="mb-3">
+        <label for="text" class="form-label">Resim</label>
+        <img src="@Model.ImageUrl.Url" alt="@Model.Name" class="img-fluid" style="width: 150px; height: 150px;" />
+    </div>
+    <button type="submit" class="btn btn-primary">Düzenle</button>
+</form>

@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace Domain.Backoffice
 {
-    public class ProductDO
+    public class OrderDO
     {
-        public ProductDO()
+        public OrderDO()
         {
             OrderItems = new HashSet<OrderItemDO>();
         }
 
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public string Amount { get; set; } = null!;
-        public int CategoryId { get; set; }
-        public int ImageUrlId { get; set; }
-        public bool IsActive { get; set; }
+        public int UserId { get; set; }
+        public int AddressId { get; set; }
+        public decimal Amount { get; set; }
+        public int State { get; set; }
 
-        public virtual ImageUrlDO ImageUrl { get; set; } = null!;
+        public virtual AddressDO Address { get; set; } = null!;
+        public virtual UserDO User { get; set; } = null!;
         public virtual ICollection<OrderItemDO> OrderItems { get; set; }
     }
 }

@@ -1,0 +1,50 @@
+﻿@model Domain.Backoffice.OrderDO
+
+<h2 class="text-center">Sipariş Detay</h2>
+<div class="container mt-5">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>İsim Soyisim</th>
+                <th>Adres</th>
+                <th>Tutar</th>
+                <th>Sipariş Durumu</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{var status = UI.BackOffice.Helper.SelectHelper.GetDescriptionFromEnumValue<Domain.Backoffice.Enum.OrderStatusEnum>(Model.State);};
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Model.User.FirstName @Model.User.LastName</td>
+                <td>@Model.Address.Value</td>
+                <td>@Model.Amount</td>
+                <td>@status</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container mt-5">
+    <h2 class="text-center">Sipariş Kalem Listesi</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ürün İsmi</th>
+                <th>Ürün Resmi</th>
+                <th>Ürün Fiyatı</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Product.Name</td>
+                    <td><img src="@item.Product.ImageUrl.Url" alt="@item.Product.Name" style="width: 150px; height: 150px;" /></td>
+                    <td>@item.Amount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

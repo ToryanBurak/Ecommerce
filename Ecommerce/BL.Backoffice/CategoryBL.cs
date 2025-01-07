@@ -33,6 +33,10 @@ namespace BL.Backoffice
                 }
             }
         }
+        public CategoryDO GetById(int id)
+        {
+            return GetAll().FirstOrDefault(x => x.Id == id);
+        }
 
         public bool AddCategory(CategoryDO category)
         {
@@ -44,6 +48,19 @@ namespace BL.Backoffice
                 categoryRepository.InsertOnSubmit(dbObject);
                 dcp.CommitChanges();
                 return true;
+            }
+
+        }
+
+        public void UpdateCategory(CategoryDO category)
+        {
+            using (DbContextProvider dcp = new DbContextProvider())
+            {
+
+                Repository<Category> categoryRepository = new Repository<Category>(dcp);
+                Category dbObject = _mapper.Map<Category>(category);
+                categoryRepository.UpdateByIdOnSubmit(dbObject);
+                dcp.CommitChanges();
             }
 
         }

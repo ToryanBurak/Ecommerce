@@ -82,7 +82,6 @@ namespace DataContext.EntityFramework.Provider
 
         public int SaveChanges(DbContext _dataContext)
         {
-
             return 1;
         }
 

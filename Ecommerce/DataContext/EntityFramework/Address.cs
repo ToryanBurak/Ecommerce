@@ -12,7 +12,7 @@ namespace DataContext.EntityFramework
 
         public int Id { get; set; }
         public string AddressDescription { get; set; } = null!;
-        public string Adress { get; set; } = null!;
+        public string Value { get; set; } = null!;
         public int UserId { get; set; }
 
         public virtual User User { get; set; } = null!;

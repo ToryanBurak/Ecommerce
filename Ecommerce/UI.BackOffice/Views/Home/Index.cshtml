@@ -37,7 +37,10 @@
                     </div>
                     <h5 class="card-title">Ürünler</h5>
                     <p class="card-text text-muted">Ürünleri yönetin ve ekleyin.</p>
-                    <a href="/Products" class="btn btn-primary">Git</a>
+                    <div class="row">
+                        <a href="@Url.Action("ProductList","Home")" class="btn btn-primary col-md-6 px-2">Git</a>
+                        <a href="@Url.Action("AddProduct","Home")" class="btn btn-primary col-md-6 px-2">Ekle</a>
+                    </div>
                 </div>
             </div>
 
@@ -49,7 +52,10 @@
                     </div>
                     <h5 class="card-title">Kategoriler</h5>
                     <p class="card-text text-muted">Kategorileri düzenleyin.</p>
-                    <a href="/Categories" class="btn btn-success">Git</a>
+                    <div class="row">
+                        <a href="@Url.Action("CategoryList","Home")" class="btn btn-success col-md-6 px-2">Git</a>
+                        <a href="@Url.Action("AddCategory","Home")" class="btn btn-success col-md-6 px-2">Ekle</a>
+                    </div>
                 </div>
             </div>
 
@@ -61,7 +67,9 @@
                     </div>
                     <h5 class="card-title">Müşteriler</h5>
                     <p class="card-text text-muted">Müşteri bilgilerini inceleyin.</p>
-                    <a href="/Customers" class="btn btn-info">Git</a>
+                    <div class="row">
+                        <a href="@Url.Action("CustomerList","Home")" class="btn btn-info col-md-12 px-2">Git</a>
+                    </div>
                 </div>
             </div>
 
@@ -73,7 +81,9 @@
                     </div>
                     <h5 class="card-title">Satışlar</h5>
                     <p class="card-text text-muted">Satış işlemlerini kontrol edin.</p>
-                    <a href="/Sales" class="btn btn-danger">Git</a>
+                    <div class="row">
+                        <a href="@Url.Action("OrderList","Home")" class="btn btn-danger col-md-12 px-2">Git</a>
+                    </div>
                 </div>
             </div>
         </div>
