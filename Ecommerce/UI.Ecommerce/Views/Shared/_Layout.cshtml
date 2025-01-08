@@ -16,10 +16,12 @@
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <script src="~/js/vendor.min.js"></script>
     <script src="~/js/theme.min.js"></script>
+    
+    <script await setElementStyles($0.querySelector('body'), { 'min-height': '100vh' }); ></script>
 </head>
 <body>
     <header class="header">
-        <div class="container-fluid">
+        <div class="container-fluid" style="padding-left: 0px !important; padding-right: 0px !important;">
             @await Component.InvokeAsync("Navbar")
         </div>
     </header>
@@ -101,6 +103,7 @@
 
             </div>
     </footer>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -56,3 +56,12 @@ button.accept-policy {
 header {
   padding: 0px !important;
 }
+
+.categories-logo {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-direction: row;
+}
+

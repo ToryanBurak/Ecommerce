@@ -595,7 +595,9 @@ pre code {
 .container-fluid {
     width: 100%;
     margin-right: auto;
-    margin-left: auto
+    margin-left: auto;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 
 }
 .container-xl {
@@ -11819,7 +11821,7 @@ hr {
 
 @media (min-width: 992px) {
 
-    .container-fluid,
+   
     .container-xl {
         padding-right: 30px;
         padding-left: 30px

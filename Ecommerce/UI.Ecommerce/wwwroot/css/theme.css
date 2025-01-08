@@ -592,6 +592,8 @@ pre code {
 
 .container-fluid {
     width: 100%;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
     margin-right: auto;
     margin-left: auto
 
@@ -11225,7 +11227,7 @@ hr {
 
 @media (min-width: 992px) {
 
-    .container-fluid,
+    /* .container-fluid, */
     .container-xl {
         padding-right: 30px;
         padding-left: 30px
@@ -14130,7 +14132,7 @@ a.nav-link:hover .media-tab-media {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: .625rem 0;
+    /* padding: .625rem 0; */
     font-size: .875rem
 }
 
