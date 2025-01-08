@@ -1,0 +1,33 @@
+﻿@model List<Domain.Backoffice.OrderDO>
+
+<div class="container mt-5">
+    <h2 class="text-center">Sipariş Listesi</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>İsim Soyisim</th>
+                <th>Adres</th>
+                <th>Tutar</th>
+                <th>Sipariş Durumu</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                var status = UI.BackOffice.Helper.SelectHelper.GetDescriptionFromEnumValue<Domain.Backoffice.Enum.OrderStatusEnum>(order.State);
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.User.FirstName @order.User.LastName</td>
+                    <td>@order.Address.Value</td>
+                    <td>@order.Amount</td>
+                    <td>@status</td>
+                    <td>
+                        <a href="@Url.Action("OrderItemList", "Home", new { orderId = order.Id })" class="btn btn-warning btn-sm">Detay</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

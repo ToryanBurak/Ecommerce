@@ -14,10 +14,9 @@
         <tbody>
             @foreach (var customer in Model.Where(x=>x.IsAdmin == false))
             {
-                string userType = customer.IsAdmin == true ? "Admin" : "User";
                 <tr>
                     <td>@customer.Id</td>
-                    <td>@customer.FirstName @customer.LastName (@userType)</td>
+                    <td>@customer.FirstName @customer.LastName</td>
                     <td>@customer.Email</td>
                     <td>@customer.Phone</td>
                 </tr>
@@ -39,10 +38,9 @@
         <tbody>
             @foreach (var customer in Model.Where(x=>x.IsAdmin))
             {
-                string userType = customer.IsAdmin == true ? "Admin" : "User";
                 <tr>
                     <td>@customer.Id</td>
-                    <td>@customer.FirstName @customer.LastName (@userType)</td>
+                    <td>@customer.FirstName @customer.LastName</td>
                     <td>@customer.Email</td>
                     <td>@customer.Phone</td>
                 </tr>

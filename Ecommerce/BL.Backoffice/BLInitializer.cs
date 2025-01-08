@@ -21,8 +21,9 @@ namespace BL.Backoffice
         {
             CreateMap<UserDO, User>().ReverseMap();
             CreateMap<ImageUrl, ImageUrlDO>().ReverseMap();
-            CreateMap<Category, CategoryDO>().ForMember(dest => dest.Url, opt => opt.Ignore()).ReverseMap();
-            CreateMap<ProductDO, Product>().ForMember(dest => dest.OrderItems, opt => opt.Ignore()).ForMember(dest => dest.ImageUrl, opt => opt.Ignore()).ReverseMap();
+            CreateMap<Category, CategoryDO>().ReverseMap();
+            CreateMap<ProductDO, Product>().ReverseMap();
+            CreateMap<ProductDO, ProductViewModel>().ForMember(dest => dest.Image, opt => opt.Ignore()).ReverseMap();
         }
     }
 }

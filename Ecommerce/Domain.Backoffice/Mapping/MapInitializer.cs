@@ -11,7 +11,7 @@ namespace Domain.Backoffice
             CreateMap<UserDO,User>().ReverseMap();
             CreateMap<Product,ProductDO>().ReverseMap();
             CreateMap<CategoryDO,Category>().ReverseMap();
-            CreateMap<ProductViewModel,Product>().ReverseMap();
+            CreateMap<ProductDO,ProductViewModel>().ForMember(dest => dest.Image, opt => opt.Ignore()).ReverseMap();
         }
     }
 }

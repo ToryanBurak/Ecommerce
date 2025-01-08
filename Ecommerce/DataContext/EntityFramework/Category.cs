@@ -8,6 +8,7 @@ namespace DataContext.EntityFramework
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public int ImageUrlId { get; set; }
+        public bool? IsActive { get; set; }
 
         public virtual ImageUrl ImageUrl { get; set; } = null!;
     }

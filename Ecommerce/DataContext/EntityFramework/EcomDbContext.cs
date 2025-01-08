@@ -28,6 +28,7 @@ namespace DataContext.EntityFramework
         {
             if (!optionsBuilder.IsConfigured)
             {
+                optionsBuilder.UseLazyLoadingProxies();
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=185.169.180.42,1433;Database=Bursimemfur;User Id=admin;Password=2605.Burak;");
             }
@@ -43,7 +44,7 @@ namespace DataContext.EntityFramework
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Adress)
+                entity.Property(e => e.Value)
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
@@ -59,6 +60,10 @@ namespace DataContext.EntityFramework
                 entity.ToTable("Category");
 
                 entity.Property(e => e.ImageUrlId).HasColumnName("ImageUrlID");
+
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
@@ -105,6 +110,8 @@ namespace DataContext.EntityFramework
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.Amount).HasColumnType("decimal(18, 0)");
+
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
                 entity.Property(e => e.ProductId).HasColumnName("ProductID");
@@ -129,6 +136,10 @@ namespace DataContext.EntityFramework
                 entity.Property(e => e.Amount)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)

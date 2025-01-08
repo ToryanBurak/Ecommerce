@@ -14,6 +14,7 @@ namespace Repository.EFContextRepository
     {
         public readonly DbContext dataContext;
         public readonly IContext<DbContext> dataContextProvider;
+        private readonly DbSet<T> dbSet;
         public Repository(IContext<DbContext> _dataContextProvider)
         {
             dataContextProvider = _dataContextProvider;

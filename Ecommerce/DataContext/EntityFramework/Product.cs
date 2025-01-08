@@ -15,6 +15,7 @@ namespace DataContext.EntityFramework
         public string Amount { get; set; } = null!;
         public int CategoryId { get; set; }
         public int ImageUrlId { get; set; }
+        public bool? IsActive { get; set; }
 
         public virtual ImageUrl ImageUrl { get; set; } = null!;
         public virtual ICollection<OrderItem> OrderItems { get; set; }

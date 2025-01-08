@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BL.Backoffice;
+using DataContext.EntityFramework;
 using Domain.Backoffice;
 using Domain.Backoffice.Enum;
 using Domain.Backoffice.UserLogin;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Net;
+using System.Security.Cryptography;
 using UI.BackOffice.Extensions;
 using UI.BackOffice.Models;
 
@@ -95,11 +97,6 @@ namespace UI.BackOffice.Controllers
         {
             CategoryBL categoryBL = new CategoryBL(_mapper);
             List<CategoryDO> categoryList = categoryBL.GetAll();
-            foreach (CategoryDO category in categoryList)
-            {
-                ImageUrlBL imageUrlBL = new ImageUrlBL(_mapper);
-                category.Url = imageUrlBL.GetImageUrlById(category.ImageUrlId);
-            }
             return View(categoryList);
         }
         [Authorize]
@@ -107,13 +104,14 @@ namespace UI.BackOffice.Controllers
         {
             ProductBL productBL = new ProductBL(_mapper);
             List<ProductDO> productList = productBL.GetAll();
-            ImageUrlBL imageUrlBL = new ImageUrlBL(_mapper);
-            CategoryBL categoryBL = new CategoryBL(_mapper);
-            foreach (ProductDO product in productList)
-            {
-                product.ImageUrl = imageUrlBL.GetImageUrlById(product.ImageUrlId);
-            }
             return View(productList);
+        }
+        [Authorize]
+        public IActionResult OrderList()
+        {
+            OrderBL orderBL = new OrderBL(_mapper);
+            List<OrderDO> orderList = orderBL.GetAll();
+            return View(orderList);
         }
         [Authorize]
         public IActionResult AddProduct()
@@ -122,14 +120,33 @@ namespace UI.BackOffice.Controllers
             return View(categoryViewModel);
         }
         [Authorize]
-        [HttpPost]
-        public IActionResult AddProduct(ProductViewModel productViewModel)
+        public IActionResult EditProduct(int id)
         {
             ProductBL productBL = new ProductBL(_mapper);
-            int imageUrlId = UploadImageAndImageUrlId(productViewModel.Image, FtpDirectoryEnum.Product);
-            productViewModel.ImageUrlId = imageUrlId;
-            ProductDO productToAdd = _mapper.Map<ProductDO>(productViewModel);
-            productBL.AddProduct(productToAdd);
+            ProductDO product = productBL.GetById(id);
+            return View(product);
+        }
+        [Authorize]
+        [HttpPost]
+        public IActionResult EditProduct(ProductDO productDO)
+        {
+            ProductBL productBL = new ProductBL(_mapper);
+            productBL.UpdateProduct(productDO);
+            return RedirectToAction("ProductList");
+        }
+        [Authorize]
+        public IActionResult ActivateProduct(int id)
+        {
+            ProductBL productBL = new ProductBL(_mapper);
+            ProductDO product = productBL.GetById(id);
+            productBL.ActivateProduct(product);
+            return RedirectToAction("ProductList");
+        }
+        [Authorize]
+        public IActionResult DeleteProduct(int id)
+        {
+            ProductBL productBL = new ProductBL(_mapper);
+            productBL.DeleteProduct(productBL.GetById(id));
             return RedirectToAction("ProductList");
         }
         [Authorize]
@@ -137,6 +154,20 @@ namespace UI.BackOffice.Controllers
         {
             CategoryViewModel categoryViewModel = new CategoryViewModel();
             return View(categoryViewModel);
+        }
+        public IActionResult EditCategory(int id)
+        {
+            CategoryBL categoryBL = new CategoryBL(_mapper);
+            CategoryDO category = categoryBL.GetById(id);
+            return View(category);
+        }
+        [Authorize]
+        [HttpPost]
+        public IActionResult EditCategory(CategoryDO categoryDO)
+        {
+            CategoryBL categoryBL = new CategoryBL(_mapper);
+            categoryBL.UpdateCategory(categoryDO);
+            return RedirectToAction("CategoryList");
         }
         [Authorize]
         [HttpPost]
@@ -147,6 +178,13 @@ namespace UI.BackOffice.Controllers
             categoryViewModel.Category.ImageUrlId = imageUrlId;
             categoryBL.AddCategory(categoryViewModel.Category);
             return RedirectToAction("CategoryList");
+        }
+        [Authorize]
+        public IActionResult OrderItemList(int orderId)
+        {
+            OrderBL orderBL = new OrderBL(_mapper);
+            OrderDO order = orderBL.GetById(orderId);
+            return View(order);
         }
         [Authorize]
         public int UploadImageAndImageUrlId(IFormFile file,FtpDirectoryEnum ftpDirectoryEnum)
