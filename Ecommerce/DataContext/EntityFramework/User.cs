@@ -8,6 +8,7 @@ namespace DataContext.EntityFramework
         public User()
         {
             Addresses = new HashSet<Address>();
+            Carts = new HashSet<Cart>();
             Orders = new HashSet<Order>();
         }
 
@@ -24,6 +25,7 @@ namespace DataContext.EntityFramework
         public bool IsAdmin { get; set; }
 
         public virtual ICollection<Address> Addresses { get; set; }
+        public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -7,6 +7,7 @@ namespace DataContext.EntityFramework
     {
         public Product()
         {
+            CartItems = new HashSet<CartItem>();
             OrderItems = new HashSet<OrderItem>();
         }
 
@@ -17,7 +18,9 @@ namespace DataContext.EntityFramework
         public int ImageUrlId { get; set; }
         public bool? IsActive { get; set; }
 
+        public virtual Category Category { get; set; } = null!;
         public virtual ImageUrl ImageUrl { get; set; } = null!;
+        public virtual ICollection<CartItem> CartItems { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

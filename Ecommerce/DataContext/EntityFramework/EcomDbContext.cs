@@ -17,6 +17,8 @@ namespace DataContext.EntityFramework
         }
 
         public virtual DbSet<Address> Addresses { get; set; } = null!;
+        public virtual DbSet<Cart> Carts { get; set; } = null!;
+        public virtual DbSet<CartItem> CartItems { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<ImageUrl> ImageUrls { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
@@ -53,6 +55,42 @@ namespace DataContext.EntityFramework
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Address_User");
+            });
+
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.ToTable("Cart");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Carts)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cart_User");
+            });
+
+            modelBuilder.Entity<CartItem>(entity =>
+            {
+                entity.ToTable("CartItem");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CartId).HasColumnName("CartID");
+
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+                entity.HasOne(d => d.Cart)
+                    .WithMany(p => p.CartItems)
+                    .HasForeignKey(d => d.CartId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CartItem_Cart");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.CartItems)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CartItem_Product");
             });
 
             modelBuilder.Entity<Category>(entity =>
@@ -144,6 +182,12 @@ namespace DataContext.EntityFramework
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.Products)
+                    .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Product_Category");
 
                 entity.HasOne(d => d.ImageUrl)
                     .WithMany(p => p.Products)
