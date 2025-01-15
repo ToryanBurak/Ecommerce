@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
 using DataContext.EntityFramework;
 using Domain.Backoffice;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL.Backoffice
 {
