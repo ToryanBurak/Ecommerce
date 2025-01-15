@@ -63,24 +63,25 @@
 
                 </a>
                 <div class="navbar-tool dropdown ml-3">
-                    <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html"><span class="navbar-tool-label">4</span><i class="navbar-tool-icon czi-cart"></i></a><a class="navbar-tool-text" href="shop-cart.html"><small>Sepetim</small>2.000₺</a>
+                    <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html"><span class="navbar-tool-label">4</span><i class="navbar-tool-icon czi-cart"></i></a><a class="navbar-tool-text" href="shop-cart.html"><small>Sepetim</small>150₺</a>
                     <!-- sepet önizlemesi-->
                     <div class="dropdown-menu dropdown-menu-right" style="width: 20rem;">
                         <div class="widget widget-cart px-3 pt-2 pb-3">
                             <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">
                                 <div class="widget-cart-item pb-2 border-bottom">
-                                    <button class="close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                                    <div class="media align-items-center">
-                                        <a class="d-block mr-2" href="shop-single-v1.html"><img width="64" src="~/img/shop/cart/widget/01.jpg" alt="Product" /></a>
-                                        <div class="media-body">
-                                            <h6 class="widget-product-title"><a href="shop-single-v1.html">Kadın Spor Ayakkabı</a></h6>
-                                            <div class="widget-product-meta"><span class="text-accent mr-2">2000₺<small>00</small></span><span class="text-muted">x 1</span></div>
+                                    @foreach (Domain.Store.CartItemDO cartItem in Model.Cart.CartItems)
+                                    {
+                                        <button class="close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
+                                        <div class="media align-items-center">
+                                            <a class="d-block mr-2" href="shop-single-v1.html"><img width="64" src="@cartItem.Product.ImageUrl.Url" alt="Product" /></a>
+                                            <div class="media-body">
+                                                <h6 class="widget-product-title"><a href="shop-single-v1.html">@cartItem.Product.Name</a></h6>
+                                                <div class="widget-product-meta"><span class="text-accent mr-2">@cartItem.Product.Amount₺<small>00</small></span><span class="text-muted">x 1</span></div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>

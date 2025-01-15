@@ -24,14 +24,18 @@ namespace UI2.ViewComponents.Navbar
             List<CategoryDO> categoryList = categoryBL.GetAll();
             UserDO user = new UserDO();
             UserBL userBL = new UserBL(_mapper);
+            CartBL cartBL = new CartBL(_mapper);
+            CartDO cart = new CartDO();
             if (User.Identity.IsAuthenticated)
             {
                 user = userBL.GetUserByGuid(new Guid(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value));
+                cart = cartBL.GetByUserId(user.Id);
             }
             IndexViewModel vm = new IndexViewModel()
             {
                 CategoryList = categoryList,
                 User = user,
+                Cart = cart
             };
             return View(vm);
         }
