@@ -20,13 +20,20 @@ namespace UI2.ViewComponents.Navbar
         [HttpGet]
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            CategoryBL categoryBL = new CategoryBL(_mapper);
+            List<CategoryDO> categoryList = categoryBL.GetAll();
             UserDO user = new UserDO();
             UserBL userBL = new UserBL(_mapper);
             if (User.Identity.IsAuthenticated)
             {
                 user = userBL.GetUserByGuid(new Guid(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value));
             }
-            return View(user);
+            IndexViewModel vm = new IndexViewModel()
+            {
+                CategoryList = categoryList,
+                User = user,
+            };
+            return View(vm);
         }
     }
 }
