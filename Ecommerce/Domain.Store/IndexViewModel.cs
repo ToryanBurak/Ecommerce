@@ -16,5 +16,7 @@ namespace Domain.Store
         public UserDO User { get; set; }
 
         public List<CategoryDO> CategoryList { get; set; }
+
+        public CartDO Cart { get; set; }
     }
 }

@@ -90,7 +90,7 @@ namespace UI.Ecommerce.Controllers
                 UserDO user = userBL.GetUserByID(model.Login.LoginResponse.UserID);
                 if (model.Login.LoginResponse.IsSuccess && user != null)
                 {
-                    IdentityHelper.Login(user, this.HttpContext);
+                    IdentityHelper.Login(user, this.HttpContext,_mapper);
                     return RedirectToAction("Index", "Home");
                 }
                 else { return View(model); }

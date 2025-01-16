@@ -41,7 +41,7 @@ namespace UI.Ecommerce.Controllers
             if (user.VerifyConfirmCode == code)
             {
                 userBL.UpdateUserVerifyState(user.Id, VerifyStateEnum.Verified);
-                IdentityHelper.Login(user, this.HttpContext);
+                IdentityHelper.Login(user, this.HttpContext, _mapper);
                 return View("Success", "Doğrulama Başarılı");
             }
             else
