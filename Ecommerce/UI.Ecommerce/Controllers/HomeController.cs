@@ -41,6 +41,9 @@ namespace UI.Ecommerce.Controllers
             return View();
         }
 
+
+
+
         [HttpPost]
         public IActionResult Register(LoginRegisterViewModel model)
         {

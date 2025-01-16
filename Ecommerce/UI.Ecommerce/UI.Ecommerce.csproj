@@ -19,8 +19,4 @@
     <ProjectReference Include="..\BL.Store\BL.Store.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Products\" />
-  </ItemGroup>
-
 </Project>
