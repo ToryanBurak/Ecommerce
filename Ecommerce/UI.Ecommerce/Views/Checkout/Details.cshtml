@@ -1,0 +1,184 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+    ViewData["Title"] = "Ödeme Detayları";
+}
+
+
+
+
+<div class="page-title-overlap bg-dark pt-4">
+    <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+            <nav aria-label="breadcrumb">
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="checkout-steps">
+                            <a asp-controller="Cart" asp-action="Index">
+                                Sepete git
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+            <h1 class="h3 text-light mb-0">Ödeme Detayları</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5 my-3">
+    
+    <form asp-action="DetailsPost" asp-controller="Checkout" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="mb-3">Fatura Adresi</h4>
+                <div class="form-group">
+                    <label for="checkout-fn">Ad</label>
+                    <input class="form-control" type="text" id="checkout-fn" placeholder="Adınız" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkout-ln">Soyad</label>
+                    <input class="form-control" type="text" id="checkout-ln" placeholder="Soyadınız" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkout-email">E-posta</label>
+                    <input class="form-control" type="email" id="checkout-email" placeholder="ornek@mail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkout-phone">Telefon Numarası</label>
+                    <input class="form-control" type="text" id="checkout-phone" placeholder="+90 555 555 55 55" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkout-city">Şehir</label>
+                    <input class="form-control" type="text" id="checkout-city" placeholder="Şehir" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkout-address">Adres</label>
+                    <input class="form-control" type="text" id="checkout-address" placeholder="Adresinizi giriniz" required>
+                </div>
+            </div>
+            <!-- Teslimat Adresi -->
+            <div class="col-md-6">
+                <h4 class="mb-3">Teslimat Adresi</h4>
+                <div class="form-group">
+                    <label for="shipping-address">Adres</label>
+                    <input class="form-control" type="text" id="shipping-address" placeholder="Farklı bir adrese gönderilecekse giriniz">
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="same-address" checked>
+                    <label class="form-check-label" for="same-address">
+                        Fatura adresi ile aynı
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h4 class="mb-3">Ödeme Yöntemi</h4>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="credit-card" name="paymentMethod" value="CreditCard" checked>
+                    <label class="form-check-label" for="credit-card">
+                        Kredi Kartı
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="bank-transfer" name="paymentMethod" value="BankTransfer">
+                    <label class="form-check-label" for="bank-transfer">
+                        Havale/EFT
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="cash-on-delivery" name="paymentMethod" value="COD">
+                    <label class="form-check-label" for="cash-on-delivery">
+                        Kapıda Ödeme
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4" id="credit-card-info">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="cc-name">Kart Üzerindeki İsim</label>
+                    <input class="form-control" type="text" id="cc-name" placeholder="Ad Soyad" required>
+                </div>
+                <div class="form-group">
+                    <label for="cc-number">Kart Numarası</label>
+                    <input class="form-control" type="text" id="cc-number" placeholder="XXXX XXXX XXXX XXXX" required>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="cc-expiration">Son Kullanma Tarihi</label>
+                    <input class="form-control" type="text" id="cc-expiration" placeholder="AA/YY" required>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="cc-cvv">CVV</label>
+                    <input class="form-control" type="text" id="cc-cvv" placeholder="XXX" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h4 class="mb-3">Sipariş Özeti</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Ürün</th>
+                            <th class="text-right">Fiyat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ürün 1 x 2</td>
+                            <td class="text-right">₺200.00</td>
+                        </tr>
+                        <tr>
+                            <td>Ürün 2 x 2</td>
+                            <td class="text-right">₺240.00</td>
+                        </tr>
+                        <tr>
+                            <td>Ürün 3 x 2</td>
+                            <td class="text-right">₺400.00</td>
+                        </tr>
+                        <tr>
+                            <td>Ürün 4 x 1</td>
+                            <td class="text-right">₺200.00</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>Ara Toplam</td>
+                            <td class="text-right">₺1040.00</td>
+                        </tr>
+                        <tr>
+                            <td>Kargo</td>
+                            <td class="text-right">₺10.00</td>
+                        </tr>
+                        <tr>
+                            <th>Genel Toplam</th>
+                            <th class="text-right">₺1050.00</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12 text-right">
+                <button class="btn btn-primary" type="submit">
+                    <a class="btn btn-primary" asp-controller="Checkout" asp-action="Complete">Siparişi tamamla</a>
+                </button>
+            </div>
+        </div>
+
+    </form>
+</div>

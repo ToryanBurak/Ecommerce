@@ -63,8 +63,17 @@
 
                 </a>
                 <div class="navbar-tool dropdown ml-3">
-                    <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html"><span class="navbar-tool-label">4</span><i class="navbar-tool-icon czi-cart"></i></a><a class="navbar-tool-text" href="shop-cart.html"><small>Sepetim</small>150₺</a>
-                    <!-- sepet önizlemesi-->
+                    <a class="navbar-tool-icon-box bg-secondary dropdown-toggle"
+                       asp-controller="Cart"
+                       asp-action="Index">
+                        <span class="navbar-tool-label">4</span>
+                        <i class="navbar-tool-icon czi-cart"></i>
+                    </a>
+                    <a class="navbar-tool-text"
+                       asp-controller="Cart"
+                       asp-action="Index">
+                        <small>Sepetim</small>150₺
+                    </a>                    <!-- sepet önizlemesi-->
                     <div class="dropdown-menu dropdown-menu-right" style="width: 20rem;">
                         <div class="widget widget-cart px-3 pt-2 pb-3">
                             <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">

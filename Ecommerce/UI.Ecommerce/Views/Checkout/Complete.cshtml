@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Sipariş Tamamlandı";
+}
+
+
+
+<div class="container py-5 my-3">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1 class="h3 mb-4">Teşekkürler, Siparişiniz Alındı!</h1>
+            <p class="lead mb-4">
+                Sipariş numaranız <strong>#34VB5540K83</strong>.
+                Yakın zamanda e-posta adresinize sipariş detayları gönderilecektir.
+            </p>
+            <a class="btn btn-primary" asp-controller="Home" asp-action="Index">
+                Anasayfaya Dön
+            </a>
+        </div>
+    </div>
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-0 box-shadow">
+                <div class="card-header bg-secondary">
+                    <h5 class="mb-0">Sipariş Özeti</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between pb-2 border-bottom">
+                        <span class="text-muted">Ara Toplam:</span>
+                        <span>₺1040.00</span>
+                    </div>
+                    <div class="d-flex justify-content-between py-2 border-bottom">
+                        <span class="text-muted">Kargo:</span>
+                        <span>₺10.00</span>
+                    </div>
+                    <div class="d-flex justify-content-between py-2">
+                        <span class="text-muted">Toplam:</span>
+                        <span class="font-weight-medium">₺1050.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
