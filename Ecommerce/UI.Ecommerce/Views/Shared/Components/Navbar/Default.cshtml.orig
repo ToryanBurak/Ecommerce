@@ -76,7 +76,11 @@
                                             <a class="d-block mr-2" href="shop-single-v1.html"><img width="64" src="@cartItem.Product.ImageUrl.Url" alt="Product" /></a>
                                             <div class="media-body">
                                                 <h6 class="widget-product-title"><a href="shop-single-v1.html">@cartItem.Product.Name</a></h6>
+<<<<<<< HEAD
                                                 <div class="widget-product-meta"><span class="text-accent mr-2">@cartItem.Product.Price₺<small>00</small></span><span class="text-muted">x 1</span></div>
+=======
+                                                <div class="widget-product-meta"><span class="text-accent mr-2">@cartItem.Product.Amount.<small>00₺</small></span><span class="text-muted">x 1</span></div>
+>>>>>>> 6434a4ffc14137b308e9ac91c73ee900fae66dbf
                                             </div>
                                         </div>
                                     
