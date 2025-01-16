@@ -4,20 +4,14 @@ namespace UI.Ecommerce.Controllers
 {
     public class CheckoutController : Controller
     {
-        [HttpGet]
-        public IActionResult Details()
+        public IActionResult Index()
         {
             return View();
         }
 
-        [HttpPost]
-        public IActionResult DetailsPost()
+        public IActionResult ConfirmMail()
         {
-            return RedirectToAction("Complete");
-        }
 
-        public IActionResult Complete()
-        {
             return View();
         }
     }
