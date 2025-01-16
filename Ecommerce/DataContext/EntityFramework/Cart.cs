@@ -12,6 +12,7 @@ namespace DataContext.EntityFramework
 
         public int Id { get; set; }
         public int UserId { get; set; }
+        public decimal TotalPrice { get; set; }
 
         public virtual User User { get; set; } = null!;
         public virtual ICollection<CartItem> CartItems { get; set; }

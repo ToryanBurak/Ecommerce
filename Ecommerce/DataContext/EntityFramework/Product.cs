@@ -13,10 +13,10 @@ namespace DataContext.EntityFramework
 
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public string Amount { get; set; } = null!;
         public int CategoryId { get; set; }
         public int ImageUrlId { get; set; }
         public bool? IsActive { get; set; }
+        public decimal? Price { get; set; }
 
         public virtual Category Category { get; set; } = null!;
         public virtual ImageUrl ImageUrl { get; set; } = null!;

@@ -27,6 +27,11 @@ namespace UI.Ecommerce.Controllers
             return View();
         }
         [Authorize]
+        public IActionResult MyAccount()
+        {
+            return View();
+        }
+        [Authorize]
         [HttpGet]
         public IActionResult VerifyConfirmCode()
         {

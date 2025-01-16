@@ -1,0 +1,80 @@
+@model Domain.Store.ProductDO
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>
+        Cartzilla | Sports Hooded Sweatshirt
+    </title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Cartzilla - Bootstrap E-commerce Template">
+    <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap 4, html5, css3, jquery, js, gallery, slider, touch, creative, clean">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<!-- Body-->
+<body>
+    <!-- Google Tag Manager (noscript)-->
+    <noscript>
+        <iframe src="//www.googletagmanager.com/ns.html?id=GTM-WKV3GT5" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
+    </noscript>
+    <!-- Page Title (Shop)-->
+    <div class="page-title-overlap bg-dark pt-4">
+        <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+            <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+                <nav aria-label="breadcrumb">
+                </nav>
+            </div>
+            <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+                <h1 class="h3 text-light mb-0">@Model.Name</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Page Content-->
+    <div class="container">
+        <!-- Gallery + details-->
+        <div class="bg-light box-shadow-lg rounded-lg px-4 py-3 mb-5">
+            <div class="px-lg-3">
+                <div class="row">
+                    <!-- Product gallery-->
+                    <div class="col-lg-7 pr-lg-0 pt-lg-4">
+                        <div class="cz-product-gallery">
+                            <div class="cz-preview order-sm-2">
+                                <div class="cz-preview-item active" id="first">
+                                    <img class="cz-image-zoom" src="@Model.ImageUrl.Url" data-zoom="img/shop/single/gallery/01.jpg" alt="Product image" style="width:500px;height:500px">
+                                    <div class="cz-image-zoom-pane"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product details-->
+                    <div class="col-lg-5 pt-4 pt-lg-0">
+                        <div class="product-details ml-auto pb-3">
+                            <div class="mb-3">
+                                <span class="h3 font-weight-normal text-accent mr-1">@Model.Price.<small>99</small></span>
+                                <span class="badge badge-danger badge-shadow align-middle mt-n2">Satışta</span>
+                            </div>
+                            <form class="mb-grid-gutter" asp-controller="Cart" asp-action="AddCartItem" enctype="multipart/form-data" method="post">
+                                <input type="hidden" name="productId" asp-for="Id" value="@Model.Id"/>
+                                <div class="form-group d-flex align-items-center">
+                                    <button class="btn btn-primary btn-shadow btn-block" type="submit"><i class="czi-cart font-size-lg mr-2"></i>Sepete Ekle</button>
+                                </div>
+                            </form>
+                            <!-- Product panels-->
+                            <div class="accordion mb-4" id="productPanels">
+                            </div>
+                            <!-- Sharing-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted font-size-sm mr-2">Top</span><i class="btn-scroll-top-icon czi-arrow-up">   </i></a>
+    <!-- JavaScript libraries, plugins and custom scripts-->
+    <script src="js/vendor.min.js"></script>
+    <script src="js/theme.min.js"></script>
+</body>
+</html>

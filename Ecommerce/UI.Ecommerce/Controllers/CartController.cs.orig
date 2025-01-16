@@ -1,12 +1,23 @@
+<<<<<<< HEAD
+﻿using Microsoft.AspNetCore.Mvc;
+=======
 ﻿using AutoMapper;
 using BL.Store;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+>>>>>>> 925b6b3754966218cf5b21b990ed24be9c32a842
 
 namespace UI.Ecommerce.Controllers
 {
     public class CartController : Controller
     {
+<<<<<<< HEAD
+        // GET: /Cart/Index
+        public IActionResult Index()
+        {
+         
+            return View(); 
+=======
         private readonly ILogger<CartController> _logger;
         private IMapper _mapper;
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -52,6 +63,7 @@ namespace UI.Ecommerce.Controllers
                 return RedirectToAction("Details", "Product", new { id = productId });
             }
             return RedirectToAction("Index", "Home");
+>>>>>>> 925b6b3754966218cf5b21b990ed24be9c32a842
         }
     }
 }

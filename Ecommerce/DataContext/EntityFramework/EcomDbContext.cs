@@ -63,6 +63,8 @@ namespace DataContext.EntityFramework
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.TotalPrice).HasColumnType("decimal(18, 0)");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.UserId)
@@ -171,10 +173,6 @@ namespace DataContext.EntityFramework
             {
                 entity.ToTable("Product");
 
-                entity.Property(e => e.Amount)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.IsActive)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
@@ -182,6 +180,8 @@ namespace DataContext.EntityFramework
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Products)

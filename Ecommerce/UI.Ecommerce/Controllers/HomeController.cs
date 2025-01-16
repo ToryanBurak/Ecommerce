@@ -28,7 +28,10 @@ namespace UI.Ecommerce.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<CategoryDO> categoryList = new List<CategoryDO>();
+            CategoryBL categoryBL = new CategoryBL(_mapper);
+            categoryList = categoryBL.GetAll();
+            return View(categoryList);
         }
 
         public IActionResult Privacy()
@@ -96,11 +99,11 @@ namespace UI.Ecommerce.Controllers
                     IdentityHelper.Login(user, this.HttpContext,_mapper);
                     return RedirectToAction("Index", "Home");
                 }
-                else { return View(model); }
+                else { return RedirectToAction("SignIn", "Home"); }
             }
             else
             {
-                return View(model);
+                return RedirectToAction("SignIn", "Home");
             }
 
         }
