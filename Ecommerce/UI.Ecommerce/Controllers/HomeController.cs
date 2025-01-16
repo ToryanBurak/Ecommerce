@@ -93,11 +93,11 @@ namespace UI.Ecommerce.Controllers
                     IdentityHelper.Login(user, this.HttpContext,_mapper);
                     return RedirectToAction("Index", "Home");
                 }
-                else { return View(model); }
+                else { return RedirectToAction("SignIn", "Home"); }
             }
             else
             {
-                return View(model);
+                return RedirectToAction("SignIn", "Home");
             }
 
         }
