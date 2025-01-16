@@ -46,6 +46,10 @@ namespace BL.Store
         {
             return GetAllCartItem().Where(x => x.CartId == cartId).ToList();
         }
+        public CartItemDO GetCartItemById(int Id)
+        {
+            return GetAllCartItem().FirstOrDefault(x => x.Id == Id);
+        }
 
         public CartDO NewCart(int userId)
         {
@@ -80,6 +84,22 @@ namespace BL.Store
                 cartItemRepository.InsertOnSubmit(dbObject);
                 dcp.CommitChanges();
                 
+            }
+        }
+        public void RemoveCartItem(int cartItemId)
+        {
+            using (DbContextProvider dcp = new DbContextProvider())
+            {
+                Repository<Cart> cartRepository = new Repository<Cart>(_dataContextProvider: dcp);
+                Repository<Product> productRepository = new Repository<Product>(dcp);
+                Repository<CartItem> cartItemRepository = new Repository<CartItem>(dcp);
+                CartItem cartItem = cartItemRepository.GetAll().FirstOrDefault(x => x.Id == cartItemId);
+                Cart cart = cartRepository.GetAll().FirstOrDefault(x => x.Id == cartItem.CartId);
+                cart.TotalPrice -= (decimal)cartItem.Product.Price;
+                cartRepository.UpdateByIdOnSubmit(cart);
+                cartItemRepository.DeleteByIdOnSubmit(cartItem.Id);
+                dcp.CommitChanges();
+
             }
         }
     }

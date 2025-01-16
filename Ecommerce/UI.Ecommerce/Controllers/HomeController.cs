@@ -28,7 +28,10 @@ namespace UI.Ecommerce.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<CategoryDO> categoryList = new List<CategoryDO>();
+            CategoryBL categoryBL = new CategoryBL(_mapper);
+            categoryList = categoryBL.GetAll();
+            return View(categoryList);
         }
 
         public IActionResult Privacy()

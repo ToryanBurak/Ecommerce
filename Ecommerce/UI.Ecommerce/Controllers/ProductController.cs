@@ -21,10 +21,18 @@ namespace UI.Ecommerce.Controllers
         {
             return View();
         }
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
+            if (id == 0 || id == null)
+            {
+                string refererUrl = Request.Headers["Referer"].ToString();
+                if (!string.IsNullOrEmpty(refererUrl))
+                {
+                    return Redirect(refererUrl);
+                }
+            }
             ProductBL productBL = new ProductBL(_mapper);
-            return View(productBL.GetById(1));
+            return View(productBL.GetById(id));
         }
     }
 }

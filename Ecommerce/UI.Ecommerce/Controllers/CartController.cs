@@ -23,7 +23,7 @@ namespace UI.Ecommerce.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddCart(int productId)
+        public IActionResult AddCartItem(int productId)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -31,8 +31,27 @@ namespace UI.Ecommerce.Controllers
                 int userId = userBL.GetUserByGuid(new Guid(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value)).Id;
                 CartBL cartBL = new CartBL(_mapper);
                 cartBL.AddCartItem(productId, userId);
+                return RedirectToAction("Details", "Product", new { id = productId });
             }
-            return View();
+            else
+            {
+                return RedirectToAction("SignIn", "Home");
+            }
+            
+        }
+        [HttpPost]
+        public IActionResult RemoveCartItem(int cartItemId)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                UserBL userBL = new UserBL(_mapper);
+                int userId = userBL.GetUserByGuid(new Guid(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value)).Id;
+                CartBL cartBL = new CartBL(_mapper);
+                int productId = cartBL.GetCartItemById(cartItemId).ProductId;
+                cartBL.RemoveCartItem(cartItemId);
+                return RedirectToAction("Details", "Product", new { id = productId });
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }
