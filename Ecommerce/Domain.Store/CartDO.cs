@@ -15,6 +15,7 @@ namespace Domain.Store
 
         public int Id { get; set; }
         public int UserId { get; set; }
+        public decimal TotalPrice { get; set; }
 
         public virtual UserDO User { get; set; } = null!;
         public virtual ICollection<CartItemDO> CartItems { get; set; }
