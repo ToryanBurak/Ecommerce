@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BL.Store;
+using Domain.Store;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -20,7 +21,15 @@ namespace UI.Ecommerce.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            CartDO cart = new CartDO();
+            if (User.Identity.IsAuthenticated)
+            {
+                UserBL userBL = new UserBL(_mapper);
+                int userId = userBL.GetUserByGuid(new Guid(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value)).Id;
+                CartBL cartBL = new CartBL(_mapper);
+                cart = cartBL.GetByUserId(userId);
+            }
+            return View(cart);
         }
         [HttpPost]
         public IActionResult AddCartItem(int productId)
@@ -37,7 +46,7 @@ namespace UI.Ecommerce.Controllers
             {
                 return RedirectToAction("SignIn", "Home");
             }
-            
+
         }
         [HttpPost]
         public IActionResult RemoveCartItem(int cartItemId)

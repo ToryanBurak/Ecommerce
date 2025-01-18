@@ -64,22 +64,11 @@
                 </a>
                 <div class="navbar-tool dropdown ml-3">
                     <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html"><i class="navbar-tool-icon czi-cart"></i></a><a class="navbar-tool-text" href="shop-cart.html"><small>Sepetim</small>@Model.Cart.TotalPrice₺</a>
-                       asp-controller="Cart"
-                       asp-action="Index">
-                        <span class="navbar-tool-label">4</span>
-                        <i class="navbar-tool-icon czi-cart"></i>
-                    </a>
-                    <a class="navbar-tool-text"
-                       asp-controller="Cart"
-                       asp-action="Index">
-                        <small>Sepetim</small>
-                    </a>                   
+                    <!-- sepet önizlemesi-->
                     <div class="dropdown-menu dropdown-menu-right" style="width: 20rem;">
                         <div class="widget widget-cart px-3 pt-2 pb-3">
-                            
+                            <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">
 
-
-                                
                                 @foreach (Domain.Store.CartItemDO cartItem in Model.Cart.CartItems)
                                 {
                                     <div class="widget-cart-item pb-2 border-bottom">
@@ -89,17 +78,13 @@
                                                 <button class="close text-danger" type="submit" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
                                             </div>
                                         </form>
-                                        
-                                    <div class="media align-items-center">
-                                        <a class="d-block mr-2" href="#">
-                                            <img src="~/img/shop/cart/02.jpg" width="64" alt="Ürün 2" />
-                                        </a>
-                                        <div class="media-body">
-                                            <h6 class="widget-product-title mb-0">
+
+                                        <div class="media align-items-center">
+                                            <a class="d-block mr-2" href="shop-single-v1.html"><img width="64" src="@cartItem.Product.ImageUrl.Url" alt="Product" /></a>
+                                            <div class="media-body">
+                                                <h6 class="widget-product-title"><a href="shop-single-v1.html">@cartItem.Product.Name</a></h6>
                                                 <div class="widget-product-meta"><span class="text-accent mr-2">@cartItem.Product.Price₺<small>00</small></span><span class="text-muted">x 1</span></div>
                                             </div>
-                                            <div class="product-meta">
-                                                <span class="text-muted">Renk:</span> Kırmızı
                                         </div>
                                     </div>
                                 }
@@ -109,81 +94,14 @@
                                 <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
                                     <div class="font-size-sm mr-2 py-2"><span class="text-muted">Toplam:</span><span class="text-accent font-size-base ml-1">@Model.Cart.TotalPrice<small>00₺</small></span></div>
                                     <a class="btn btn-outline-secondary btn-sm" href="shop-cart.html">Sepete Git<i class="czi-arrow-right ml-1 mr-n1"></i></a>
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <div class="media align-items-center">
-                                        <a class="d-block mr-2" href="#">
-                                            <img src="~/img/shop/cart/03.jpg" width="64" alt="Ürün 3" />
-                                        </a>
-                                        <div class="media-body">
-                                            <h6 class="widget-product-title mb-0">
-                                                <a href="#">Ürün Adı 3</a>
-                                            </h6>
-                                            <div class="product-meta">
-                                                <span class="text-muted">Beden:</span> M
-                                            </div>
-                                        </div>
+                                </div>
                                 <a class="btn btn-primary btn-sm btn-block" href="checkout-details.html"><i class="czi-card mr-2 font-size-base align-middle"></i>Ödeme Yap</a>
-                                        <span class="text-center text-lg text-medium ml-2">₺190.00</span>
-                                    </div>
-                                </div>
-
-                               
-                                <div class="widget-cart-item pb-2 border-bottom">
-                                    <button class="close text-danger" type="button" aria-label="Remove">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <div class="media align-items-center">
-                                        <a class="d-block mr-2" href="#">
-                                            <img src="~/img/shop/cart/01.jpg" width="64" alt="Ürün 1" />
-                                        </a>
-                                        <div class="media-body">
-                                            <h6 class="widget-product-title mb-0">
-                                                <a href="#">Ürün Adı 1</a>
-                                            </h6>
-                                            <div class="product-meta">
-                                                <span class="text-muted">Renk:</span> Siyah
-                                            </div>
-                                        </div>
-                                      
-                                        <span class="text-center text-lg text-medium ml-2">₺120.00</span>
-                                    </div>
-                                </div>
-
-                            
-                                <div class="widget-cart-item pb-2 border-bottom">
-                                    <button class="close text-danger" type="button" aria-label="Remove">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <div class="media align-items-center">
-                                        <a class="d-block mr-2" href="#">
-                                            <img src="~/img/shop/cart/02.jpg" width="64" alt="Ürün 4" />
-                                        </a>
-                                        <div class="media-body">
-                                            <h6 class="widget-product-title mb-0">
-                                                <a href="#">Ürün Adı 4</a>
-                                            </h6>
-                                            <div class="product-meta">
-                                                <span class="text-muted">Renk:</span> Lacivert
-                                            </div>
-
-                                        </div>
-
-                                        <span class="text-center text-lg text-medium ml-2">₺300.00</span>
-                                    </div>
-                                </div>
-
                             </div>
-                           
-                            <div class="text-center mt-3">
-                                <a asp-controller="Cart" asp-action="Index" class="btn btn-primary btn-sm">
-                                    Sepeti Görüntüle
-                                </a>
-                            </div>
+
                         </div>
+
                     </div>
-
-
+                </div>
             </div>
         </div>
 

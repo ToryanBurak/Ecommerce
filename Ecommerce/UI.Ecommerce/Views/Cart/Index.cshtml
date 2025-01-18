@@ -1,5 +1,5 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model Domain.Store.CartDO
+@{
     ViewData["Title"] = "Alışveriş Sepeti";
 }
 
@@ -7,10 +7,6 @@
     <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
         <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-star">
-                    <li class="breadcrumb-item "><a href="/"><i class="czi-home"></i>Ana Sayfa</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Sepet</li>
-                </ol>
             </nav>
         </div>
         <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
@@ -28,8 +24,6 @@
                 <tr>
                     <th>Ürün</th>
                     <th class="text-center">Fiyat</th>
-                    <th class="text-center">Adet</th>
-                    <th class="text-center">Ara Toplam</th>
                     <th class="text-center">
                         <button class="btn btn-sm btn-outline-danger" id="btnClearCart">
                             <i class="czi-close-circle"></i> Temizle
@@ -38,155 +32,36 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <div class="media align-items-center">
-                            <a class="d-block mr-2" href="#">
-                                <img src="~/img/shop/cart/01.jpg" width="64" alt="Ürün 1">
-                            </a>
-                            <div class="media-body">
-                                <h6 class="product-title mb-0">
-                                    <a href="#">Ürün Adı 1</a>
-                                </h6>
-                                <div class="product-meta">
-                                    <span class="text-muted">Beden:</span> M
+                @if (Model != null)
+                {
+                    @foreach (Domain.Store.CartItemDO cartItem in Model.CartItems)
+                    {
+                        <tr>
+                            <td>
+                                <div class="media align-items-center">
+                                    <a class="d-block mr-2" href="#">
+                                        <img src="@cartItem.Product.ImageUrl.Url" width="64" alt="@cartItem.Product.Name">
+                                    </a>
+                                    <div class="media-body">
+                                        <h6 class="product-title mb-0">
+                                            <a href="@Url.Action("Details", "Product", new {id = cartItem.Product.Id})">@cartItem.Product.Name</a>
+                                        </h6>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center text-lg text-medium" data-price="100">₺100.00</td>
-                    <td class="text-center">
-                        <div class="d-flex justify-content-center">
-                            <div class="input-group input-group-sm quantity" style="max-width: 120px;">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-decrement btn-outline-secondary" type="button">-</button>
-                                </div>
-                                <input class="form-control text-center cart-qty" type="text" value="2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-increment btn-outline-secondary" type="button">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center text-lg text-medium subtotalCell">₺200.00</td>
-                    <td class="text-center">
-                        <button class="btn btn-sm btn-outline-danger btn-remove" type="button">
-                            <i class="czi-close-circle"></i>
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="media align-items-center">
-                            <a class="d-block mr-2" href="#">
-                                <img src="~/img/shop/cart/02.jpg" width="64" alt="Ürün 2">
-                            </a>
-                            <div class="media-body">
-                                <h6 class="product-title mb-0">
-                                    <a href="#">Ürün Adı 2</a>
-                                </h6>
-                                <div class="product-meta">
-                                    <span class="text-muted">Renk:</span> Kırmızı
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center text-lg text-medium" data-price="120">₺120.00</td>
-                    <td class="text-center">
-                        <div class="d-flex justify-content-center">
-                            <div class="input-group input-group-sm quantity" style="max-width: 120px;">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-decrement btn-outline-secondary" type="button">-</button>
-                                </div>
-                                <input class="form-control text-center cart-qty" type="text" value="2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-increment btn-outline-secondary" type="button">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center text-lg text-medium subtotalCell">₺240.00</td>
-                    <td class="text-center">
-                        <button class="btn btn-sm btn-outline-danger btn-remove" type="button">
-                            <i class="czi-close-circle"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="media align-items-center">
-                            <a class="d-block mr-2" href="#">
-                                <img src="~/img/shop/cart/03.jpg" width="64" alt="Ürün 3">
-                            </a>
-                            <div class="media-body">
-                                <h6 class="product-title mb-0">
-                                    <a href="#">Ürün Adı 3</a>
-                                </h6>
-                               @*  <div class="product-meta">
-                                    <span class="text-muted">Beden:</span> M
-                                </div> *@
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center text-lg text-medium" data-price="200">₺200.00</td>
-                    <td class="text-center">
-                        <div class="d-flex justify-content-center">
-                            <div class="input-group input-group-sm quantity" style="max-width: 120px;">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-decrement btn-outline-secondary" type="button">-</button>
-                                </div>
-                                <input class="form-control text-center cart-qty" type="text" value="2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-increment btn-outline-secondary" type="button">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center text-lg text-medium subtotalCell">₺400.00</td>
-                    <td class="text-center">
-                        <button class="btn btn-sm btn-outline-danger btn-remove" type="button">
-                            <i class="czi-close-circle"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="media align-items-center">
-                            <a class="d-block mr-2" href="#">
-                                <img src="~/img/shop/cart/04.jpg" width="64" alt="Ürün 4">
-                            </a>
-                            <div class="media-body">
-                                <h6 class="product-title mb-0">
-                                    <a href="#">Ürün Adı 4</a>
-                                </h6>
-                                <div class="product-meta">
-                                    <span class="text-muted">Beden:</span> XL
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center text-lg text-medium" data-price="200">₺200.00</td>
-                    <td class="text-center">
-                        <div class="d-flex justify-content-center">
-                            <div class="input-group input-group-sm quantity" style="max-width: 120px;">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-decrement btn-outline-secondary" type="button">-</button>
-                                </div>
-                                <input class="form-control text-center cart-qty" type="text" value="1">
-                                <div class="input-group-append">
-                                    <button class="btn btn-increment btn-outline-secondary" type="button">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center text-lg text-medium subtotalCell">₺200.00</td>
-                    <td class="text-center">
-                        <button class="btn btn-sm btn-outline-danger btn-remove" type="button">
-                            <i class="czi-close-circle"></i>
-                        </button>
-                    </td>
-                </tr>
+                            </td>
+                            <td class="text-center text-lg text-medium" data-price="100">@cartItem.Product.Price₺</td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-outline-danger btn-remove" type="button">
+                                    <i class="czi-close-circle"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <h1>Sepetiniz Boş.</h1>
+                }
             </tbody>
         </table>
     </div>
@@ -194,24 +69,18 @@
     <div class="row justify-content-end pt-3">
         <div class="col-md-5 col-xl-4">
             <div class="bg-secondary rounded px-3 py-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Ara Toplam:</span>
-                    <span class="font-size-md" id="cartSubtotal">₺0.00</span>
-                </div>
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Kargo:</span>
-                    <span class="font-size-md" id="cartShipping">₺10.00</span>
-                </div>
                 <div class="d-flex justify-content-between align-items-center font-size-lg mb-4">
                     <span class="text-muted">Toplam:</span>
-                    <span class="font-weight-medium" id="cartTotal">₺10.00</span>
+                    <span class="font-weight-medium" id="cartTotal">@Model.TotalPrice₺</span>
                 </div>
-                <a class="btn btn-primary btn-block" asp-controller="Checkout" asp-action="Details">
+                <a class="btn btn-primary btn-block" asp-controller="Checkout" asp-action="Index">
                     Ödemeye Devam Et
                 </a>
             </div>
         </div>
-
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 @section Scripts {
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -229,7 +98,7 @@
                 btn.addEventListener('click', function () {
                     const input = this.closest('.input-group').querySelector('.cart-qty');
                     let val = parseInt(input.value) || 1;
-                    if(val > 1) {
+                    if (val > 1) {
                         val--;
                         input.value = val;
                     }
@@ -252,7 +121,7 @@
             cartTable.querySelectorAll('.btn-remove').forEach(btn => {
                 btn.addEventListener('click', function () {
                     const row = this.closest('tr');
-                    row.remove(); 
+                    row.remove();
                     calculateCartTotals();
                 });
             });
@@ -272,13 +141,13 @@
                 let qty = parseInt(qtyInput.value) || 1;
                 let subtotal = price * qty;
                 subtotalCell.textContent = `₺${subtotal.toFixed(2)}`;
-            } 
+            }
             function calculateCartTotals() {
                 let sum = 0;
                 cartTable.querySelectorAll('tbody tr').forEach(row => {
                     const subtotalCell = row.querySelector('.subtotalCell');
-                    if(subtotalCell) {
-                        let text = subtotalCell.textContent.replace('₺','').trim();
+                    if (subtotalCell) {
+                        let text = subtotalCell.textContent.replace('₺', '').trim();
                         let val = parseFloat(text) || 0;
                         sum += val;
                     }
