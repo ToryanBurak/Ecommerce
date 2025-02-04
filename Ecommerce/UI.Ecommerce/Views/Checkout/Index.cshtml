@@ -1,7 +1,99 @@
-﻿@{
+﻿@model Domain.Store.CheckoutViewModel
+@{
 
     ViewData["Title"] = "Ödeme Detayları";
 }
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+<script>
+    window.onload = function () {
+        var checkedRadio = document.querySelector('input[name="option"]:checked');
+        if (checkedRadio) {
+            toggleDivs(checkedRadio.value === '1' ? 'div1' : 'div2');
+            document.getElementById('use-saved-adress').value = 'true';
+        }
+    };
+    function toggleDivs(visibleDivId, useSavedAddress) {
+        // Tüm divleri gizle
+        document.getElementById('div1').classList.add('hidden');
+        document.getElementById('div2').classList.add('hidden');
+
+        // Seçilen divi göster
+        document.getElementById(visibleDivId).classList.remove('hidden');
+        document.getElementById('use-saved-adress').value = useSavedAddress;
+    }
+    function onCityChange(cityDropdown) {
+        const cityKey = cityDropdown.value;
+        const districtDropdown = document.getElementById('district-dropdown');
+
+        if (cityKey) {
+            // İlçe dropdown'ını aktif hale getir
+            districtDropdown.disabled = false;
+
+            // AJAX ile ilçe listesini getir
+            /**/
+            fetch(`/Checkout/GetDistrictListByCityKey?cityKey=${cityKey}`)
+                /**/
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    // İlçe dropdown'ını güncelle
+                    districtDropdown.innerHTML = '';
+
+                    data.forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district.value;
+                        option.text = district.text;
+                        districtDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Hata:', error.stack);
+                });
+        } else {
+            // İlçe dropdown'ını pasif yap ve temizle
+            districtDropdown.disabled = true;
+            districtDropdown.innerHTML = '';
+        }
+    }
+    function onDistrictChange(districtDropdown) {
+        const districtKey = districtDropdown.value;
+        const townDropdown = document.getElementById('town-dropdown');
+
+        if (districtKey) {
+            // Mahalle dropdown'ını aktif hale getir
+            townDropdown.disabled = false;
+
+            // AJAX ile ilçe listesini getir
+            /**/
+            fetch(`/Checkout/GetTownListByDistrictKey?districtKey=${districtKey}`)
+                /**/
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    // town dropdown'ını güncelle
+                    townDropdown.innerHTML = '';
+
+                    data.forEach(town => {
+                        const option = document.createElement('option');
+                        option.value = town.value;
+                        option.text = town.text;
+                        townDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Hata:', error.stack);
+                });
+        } else {
+            // İlçe dropdown'ını pasif yap ve temizle
+            townDropdown.disabled = true;
+            townDropdown.innerHTML = '';
+        }
+    }
+</script>
 <div class="page-title-overlap bg-dark pt-4">
     <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
         <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
@@ -11,7 +103,7 @@
                     <div class="col">
                         <div class="checkout-steps">
                             <a asp-controller="Cart" asp-action="Index">
-                               < Sepete Dön
+                                < Sepete Dön
                             </a>
 
                         </div>
@@ -24,36 +116,56 @@
         </div>
     </div>
 </div>
-
 <div class="container py-5 my-3">
-
-    <form asp-action="DetailsPost" asp-controller="Checkout" method="post">
+    <form asp-action="Checkout" asp-controller="Checkout" method="post">
         <div class="row">
             <div class="col-md-6">
-                <h4 class="mb-3">Teslimat Adresi</h4>
-                <div class="form-group">
-                    <label for="checkout-fn">Ad</label>
-                    <input class="form-control" type="text" id="checkout-fn" placeholder="Adınız" required>
+                <h4>Teslimat Seçeneği</h4>
+                <label>
+                    <input type="radio" name="option" value="1" onclick="toggleDivs('div1',true)" checked>
+                    Kayıtlı Adreslerimden seçmek istiyorum
+                </label>
+                <label>
+                    <input type="radio" name="option" value="2" onclick="toggleDivs('div2',false)">
+                    Farklı Bir adres seçmek istiyorum
+                </label>
+
+                <div class="col-md-12" id="div2">
+                    <div class="form-group">
+                        <input class="form-control" type="hidden" asp-for="UseSavedAdress" name="UseSavedAdress" id="use-saved-adress" value="false" required>
+                    </div>
+                    <h4 class="mb-3">Teslimat Adresi</h4>
+                    <div class="form-group">
+                        <label for="checkout-city">Adres Başlığı</label>
+                        <input class="form-control" asp-for="Adress.AddressDescription" name="Adress.AddressDescription" type="text" placeholder="Adres Başlığı">
+                    </div>
+                    <div class="form-group">
+                        <label>İl</label>
+                        @Html.DropDownListFor(x => x.CityKey, UI.Ecommerce.Helper.SelectHelper.GetCityList(), new { @class = "form-control", @id = "city-dropdown", @onchange = "javascript:onCityChange(this)" })
+                    </div>
+                    <div class="form-group">
+                        <!-- İlçe Dropdown -->
+                        <label for="Ilce">İlçe</label>
+                        @Html.DropDownListFor(x => x.DistrictKey, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"), new { @class = "form-control", @id = "district-dropdown", @disabled = "true", @onchange = "javascript:onDistrictChange(this)" })
+                    </div>
+                    <div class="form-group">
+                        <!-- İlçe Dropdown -->
+                        <label for="Ilce">Mahalle</label>
+                        @Html.DropDownListFor(x => x.Adress.TownId, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"), new { @class = "form-control", @id = "town-dropdown", @disabled = "true" })
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-address">Adres</label>
+                        <textarea class="form-control" rows="5" asp-for="Adress.Value" name="Adress.Value" type="text" id="checkout-address" placeholder="Adresinizi giriniz"></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="checkout-ln">Soyad</label>
-                    <input class="form-control" type="text" id="checkout-ln" placeholder="Soyadınız" required>
-                </div>
-                <div class="form-group">
-                    <label for="checkout-email">E-posta</label>
-                    <input class="form-control" type="email" id="checkout-email" placeholder="ornek@mail.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="checkout-phone">Telefon Numarası</label>
-                    <input class="form-control" type="text" id="checkout-phone" placeholder="+90 555 555 55 55" required>
-                </div>
-                <div class="form-group">
-                    <label for="checkout-city">Şehir</label>
-                    <input class="form-control" type="text" id="checkout-city" placeholder="Şehir" required>
-                </div>
-                <div class="form-group">
-                    <label for="checkout-address">Adres</label>
-                    <textarea class="form-control" rows="5" type="text" id="checkout-address" placeholder="Adresinizi giriniz" required></textarea>
+                <div class="col-md-12" id="div1">
+                    <div class="form-group">
+                        <input class="form-control" type="hidden" asp-for="UseSavedAdress" name="UseSavedAdress" id="use-saved-adress" value="true" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="text" class="form-label">Adresinizi Seçiniz</label>
+                        @Html.DropDownListFor(x => x.Adress.Id, UI.Ecommerce.Helper.SelectHelper.GetUserAddressList(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value), new { @class = "form-control" })
+                    </div>
                 </div>
             </div>
             <!-- Teslimat Adresi -->
@@ -65,25 +177,27 @@
                 </div>
 
                 <div class="row mt-4" id="credit-card-info">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
-                            <label for="cc-name">Kart Üzerindeki İsim</label>
+                            <label for="cc-name"><small>Kart Üzerindeki İsim</small></label>
                             <input class="form-control" type="text" id="cc-name" placeholder="Ad Soyad" required>
                         </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label for="cc-number">Kart Numarası</label>
+                            <label for="cc-number"><small>Kart Numarası</small></label>
                             <input class="form-control" type="text" id="cc-number" placeholder="XXXX XXXX XXXX XXXX" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="cc-expiration">Son Kullanma Tarihi</label>
+                            <label for="cc-expiration"><small>Son Kullanma Tarihi</small></label>
                             <input class="form-control" type="text" id="cc-expiration" placeholder="AA/YY" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
-                            <label for="cc-cvv">CVV</label>
+                            <label for="cc-cvv"><small>CVV</small></label>
                             <input class="form-control" type="text" id="cc-cvv" placeholder="XXX" required>
                         </div>
                     </div>
@@ -102,48 +216,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Ürün 1 x 2</td>
-                            <td class="text-right">₺200.00</td>
-                        </tr>
-                        <tr>
-                            <td>Ürün 2 x 2</td>
-                            <td class="text-right">₺240.00</td>
-                        </tr>
-                        <tr>
-                            <td>Ürün 3 x 2</td>
-                            <td class="text-right">₺400.00</td>
-                        </tr>
-                        <tr>
-                            <td>Ürün 4 x 1</td>
-                            <td class="text-right">₺200.00</td>
-                        </tr>
+                        @foreach (Domain.Store.CartItemDO cartItem in Model.Cart.CartItems)
+                        {
+                            <tr>
+                                <td>@cartItem.Product.Name</td>
+                                <td class="text-right">@cartItem.Product.Price₺</td>
+                            </tr>
+                        }
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td>Ara Toplam</td>
-                            <td class="text-right">₺1040.00</td>
-                        </tr>
-                        <tr>
-                            <td>Kargo</td>
-                            <td class="text-right">₺10.00</td>
-                        </tr>
-                        <tr>
                             <th>Genel Toplam</th>
-                            <th class="text-right">₺1050.00</th>
+                            <th class="text-right">@Model.Cart.TotalPrice₺</th>
                         </tr>
                     </tfoot>
                 </table>
             </div>
         </div>
-
         <div class="row mt-4">
             <div class="col-md-12 text-right">
-                <button class="btn btn-primary" type="submit">
-                    <a class="btn btn-primary" asp-controller="Checkout" asp-action="Complete">Siparişi tamamla</a>
-                </button>
+                <button class="btn btn-primary" type="submit">Siparişi tamamla</button>
             </div>
         </div>
-
     </form>
 </div>

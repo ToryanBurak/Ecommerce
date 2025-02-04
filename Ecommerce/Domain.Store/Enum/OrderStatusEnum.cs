@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Backoffice.Enum
+namespace Domain.Store.Enum
 {
     public enum OrderStatusEnum
     {
         [Description("Kabul Bekleniyor")]
         ApproveWaiting = 0,
         [Description("Kabul Edildi")]
-        Approved = 1,
+        Approved=1,
         [Description("Hazırlanıyor")]
         Pending = 2,
         [Description("Yolda")]

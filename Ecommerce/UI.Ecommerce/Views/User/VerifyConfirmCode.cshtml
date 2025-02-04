@@ -1,18 +1,35 @@
-﻿<div class="main-wrapper login-body">
-    <div class="login-wrapper">
-        <div class="loginbox">
-            <div class="login-auth">
-                <div class="login-auth-wrap">
-                    <h4>Hesabınıza Giriş Yapmak için Mailinize Gelen Doğrulama Kodunu Giriniz</h4>
-                    <form method="post" asp-action="VerifyConfirmCode" asp-controller="User" enctype="multipart/form-data">
-                        <div class="input-block">
-                            <label class="form-label">Doğrulama Kodu <span class="text-danger">*</span></label>
-                            <input type="text" name="code" class="form-control" placeholder="Doğrulama Kodunu Giriniz">
-                        </div>
-                        <button type="submit" class="btn btn-outline-light w-100 btn-size mt-1">Doğrula</button>
-                    </form>
-                </div>
+﻿@model string
+@{
+    ViewData["Title"] = "Doğrulama Kodu";
+}
+
+<div class="d-flex justify-content-center my-5">
+
+    <div class="card shadow p-4" style="max-width: 400px;">
+
+        <h4 class="card-title text-center mb-3">E-posta Doğrulama</h4>
+        @{
+            string modelstring = String.IsNullOrWhiteSpace(Model) ? string.Empty : Model;
+
+                <p class="text-danger text-center mb-4" style="font-size: 0.9rem;">@modelstring</p>
+        }
+        <p class="text-muted text-center mb-4" style="font-size: 0.9rem;">
+            Lütfen e-postanıza gelen doğrulama kodunu giriniz
+        </p>
+        <!-- Form -->
+        <form asp-action="VerifyConfirmCode" method="post">
+            <div class="form-group">
+                <label for="Code">Kod</label>
+                <input name="confirmcode"
+                       id="Code"
+                       class="form-control"
+                       placeholder="6 haneli kod"
+                       style="max-width: 100%;" />
             </div>
-        </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Doğrula</button>
+            </div>
+        </form>
     </div>
 </div>

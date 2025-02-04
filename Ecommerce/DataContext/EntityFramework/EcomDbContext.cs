@@ -20,10 +20,13 @@ namespace DataContext.EntityFramework
         public virtual DbSet<Cart> Carts { get; set; } = null!;
         public virtual DbSet<CartItem> CartItems { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
+        public virtual DbSet<City> Cities { get; set; } = null!;
+        public virtual DbSet<District> Districts { get; set; } = null!;
         public virtual DbSet<ImageUrl> ImageUrls { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderItem> OrderItems { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<Town> Towns { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -49,6 +52,12 @@ namespace DataContext.EntityFramework
                 entity.Property(e => e.Value)
                     .HasMaxLength(250)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Town)
+                    .WithMany(p => p.Addresses)
+                    .HasForeignKey(d => d.TownId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Address_Town");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Addresses)
@@ -116,6 +125,28 @@ namespace DataContext.EntityFramework
                     .HasConstraintName("FK_Category_ImageUrl");
             });
 
+            modelBuilder.Entity<City>(entity =>
+            {
+                entity.ToTable("City");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.Name).HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<District>(entity =>
+            {
+                entity.ToTable("District");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.Name).HasMaxLength(255);
+            });
+
             modelBuilder.Entity<ImageUrl>(entity =>
             {
                 entity.ToTable("ImageUrl");
@@ -181,7 +212,9 @@ namespace DataContext.EntityFramework
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.Price)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasDefaultValueSql("((1))");
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Products)
@@ -194,6 +227,19 @@ namespace DataContext.EntityFramework
                     .HasForeignKey(d => d.ImageUrlId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Product_ImageUrl");
+            });
+
+            modelBuilder.Entity<Town>(entity =>
+            {
+                entity.ToTable("Town");
+
+                entity.HasIndex(e => e.Id, "Town_DistrictKey_Index");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.Name).HasMaxLength(255);
             });
 
             modelBuilder.Entity<User>(entity =>
