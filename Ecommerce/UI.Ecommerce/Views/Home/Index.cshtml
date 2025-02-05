@@ -57,10 +57,10 @@
         temp++;
         if (temp % 2 == 1)
         {
-            <div class="container pt-lg-3 mb-4 mb-sm-5">
+            <div class="container pt-lg-3 mb-4 mb-sm-5 bg-warning">
                 <div class="row">
                     <!-- Banner with controls-->
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <div class="d-flex flex-column h-100 overflow-hidden rounded-lg" style="background-color: #f6f8fb;">
                             <div class="d-flex justify-content-between px-grid-gutter py-grid-gutter">
                                 <div>
@@ -74,30 +74,28 @@
                         </div>
                     </div>
                     <!-- Product grid (carousel)-->
-                    <div class="col-md-7 pt-4 pt-md-0">
-                        <!-- kaydırma2-->
-                        @foreach (Domain.Store.ProductDO product in category.Products)
-                        {
-                            <div>
-                                <div class="row mx-n2">
-                                    <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4 d-none d-lg-block">
-                                        <div class="card product-card card-static">
-                                            <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img src="@product.ImageUrl.Url" alt="Tişört"></a>
-                                            <div class="card-body py-2">
-                                                <a class="product-meta d-block font-size-xs pb-1" href="#">@category.Name</a>
-                                                <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">@product.Name</a></h3>
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="product-price"><span class="text-accent">@product.Price<small>.00₺</small></span></div>
-                                                    <div class="star-rating">
-                                                        <i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star"></i>
-                                                    </div>
+                    <div class="col-md-9 pt-md-0">
+                        <div class="row">
+                            <!-- kaydırma2-->
+                            @foreach (Domain.Store.ProductDO product in category.Products.Where(x => x.IsActive == true).ToList())
+                            {
+                                <div class="col-lg-4 col-md-6 px-0 px-sm-2 mb-sm-4 d-none d-lg-block">
+                                    <div class="card product-card card-static">
+                                        <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img src="@product.ImageUrl.Url" alt="@product.Name" style="width: 300px; height: 300px; "></a>
+                                        <div class="card-body py-2">
+                                            <a class="product-meta d-block font-size-xs pb-1" href="#">@category.Name</a>
+                                            <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">@product.Name</a></h3>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="product-price"><span class="text-accent">@product.Price<small>.00₺</small></span></div>
+                                                <div class="star-rating">
+                                                    <i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star"></i>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>
                         <!-- kaydırma2-->
                     </div>
                 </div>
@@ -106,10 +104,10 @@
         else
         {
             <!-- Category (ELektronik)-->
-            <div class="container pt-lg-4 mb-4 mb-sm-5" style="padding-left: 50px; padding-right: 50px;">
+            <div class="container pt-lg-4 mb-4 mb-sm-5 bg-success" style="padding-left: 50px; padding-right: 50px;">
                 <div class="row">
                     <!-- Banner with controls-->
-                    <div class="col-md-5 order-md-2">
+                    <div class="col-md-3 order-md-2">
                         <div class="d-flex flex-column h-100 overflow-hidden rounded-lg" style="background-color: #f6f8fb;">
                             <div class="d-flex justify-content-between px-grid-gutter py-grid-gutter">
                                 <div class="order-md-2">
@@ -123,31 +121,28 @@
                         </div>
                     </div>
                     <!-- Product grid (carousel)-->
-                    <div class="col-md-7 pt-4 pt-md-0 order-md-1">
-
-                        <!-- kaydrıma1-->
-                        @foreach (Domain.Store.ProductDO product in category.Products)
-                        {
-                            <div>
-                                <div class="row mx-n2">
-                                    <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4 d-none d-lg-block">
-                                        <div class="card product-card card-static">
-                                            <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img src="@product.ImageUrl.Url" alt="Product"></a>
-                                            <div class="card-body py-2">
-                                                <a class="product-meta d-block font-size-xs pb-1" href="#">@category.Name</a>
-                                                <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">@product.Name</a></h3>
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="product-price"><span class="text-accent">@product.Price<small>.00₺</small></span></div>
-                                                    <div class="star-rating">
-                                                        <i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star"></i>
-                                                    </div>
+                    <div class="col-md-9 pt-4 pt-md-0">
+                        <div class="row">
+                            <!-- kaydrıma1-->
+                            @foreach (Domain.Store.ProductDO product in category.Products.Where(x => x.IsActive == true).ToList())
+                            {
+                                <div class="col-lg-4 col-md-6 px-0 px-sm-2 mb-sm-4 d-none d-lg-block">
+                                    <div class="card product-card card-static">
+                                        <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img src="@product.ImageUrl.Url" alt="@product.Name" style="width: 300px; height: 300px; "></a>
+                                        <div class="card-body py-2">
+                                            <a class="product-meta d-block font-size-xs pb-1" href="#">@category.Name</a>
+                                            <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">@product.Name</a></h3>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="product-price"><span class="text-accent">@product.Price<small>.00₺</small></span></div>
+                                                <div class="star-rating">
+                                                    <i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star"></i>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>
                         <!-- kaydrıma2-->
                     </div>
                 </div>

@@ -19,15 +19,11 @@
     </div>
     <div class="mb-3">
         <label for="text" class="form-label">Fiyat</label>
-        <input type="number" name="Amount" class="form-control" asp-for="Amount" required id="reg-fn">
+        <input type="number" name="Price" class="form-control" asp-for="Price" required id="reg-fn">
     </div>
     <div class="mb-3">
         <label for="text" class="form-label">Kategori</label>
         @Html.DropDownListFor(x => x.CategoryId, UI.BackOffice.Helper.SelectHelper.GetCategoryList(), new { @class = "form-control", @disabled = "disabled", @name = "CategoryId" })
-    </div>
-    <div class="mb-3">
-        <label for="text" class="form-label">Resim</label>
-        <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid" style="width: 150px; height: 150px;" />
     </div>
     <button type="submit" class="btn btn-primary">Düzenle</button>
 </form>
