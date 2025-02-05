@@ -1,4 +1,6 @@
 ﻿@model Domain.Store.UserLogin.LoginRegisterViewModel
+
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -132,8 +134,10 @@
                         </div>
                     </div>
                     <div class="text-right">
-                        <button class="btn btn-primary" type="submit"><i class="czi-user mr-2 ml-n1"></i>Kayıt Ol</button>
-                            <a asp-controller="Checkout" asp-action="ConfirmMail">Kayıt Ol</a>
+                        <a asp-controller="VerifyCode" asp-action="VerifyCode">
+                        Kayıt Ol
+                    </a>
+                    
                     </div>
                 </form>
             </div> 

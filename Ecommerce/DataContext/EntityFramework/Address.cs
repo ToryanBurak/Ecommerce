@@ -14,7 +14,9 @@ namespace DataContext.EntityFramework
         public string AddressDescription { get; set; } = null!;
         public string Value { get; set; } = null!;
         public int UserId { get; set; }
+        public int TownId { get; set; }
 
+        public virtual Town Town { get; set; } = null!;
         public virtual User User { get; set; } = null!;
         public virtual ICollection<Order> Orders { get; set; }
     }

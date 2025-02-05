@@ -1,4 +1,5 @@
-﻿using Domain.Store;
+﻿using DataContext.EntityFramework;
+using Domain.Store;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,9 @@ namespace Domain.Store
         public string AddressDescription { get; set; } = null!;
         public string Value { get; set; } = null!;
         public int UserId { get; set; }
+        public int TownId { get; set; }
+
+        public virtual TownDO Town { get; set; } = null!;
 
         public virtual UserDO User { get; set; } = null!;
         public virtual ICollection<OrderDO> Orders { get; set; }

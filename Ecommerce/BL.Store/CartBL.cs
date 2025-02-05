@@ -102,5 +102,20 @@ namespace BL.Store
 
             }
         }
+        public void RefreshCart(int userId)
+        {
+            using (DbContextProvider dcp = new DbContextProvider())
+            {
+                Repository<Cart> cartRepository = new Repository<Cart>(_dataContextProvider: dcp);
+                Repository<CartItem> cartItemRepository = new Repository<CartItem>(dcp);
+                Cart cart = cartRepository.GetAll().FirstOrDefault(x => x.UserId == userId);
+                List<int> cartItemIdList = cartItemRepository.GetAll().Where(x => x.CartId == cart.Id).Select(a=>a.Id).ToList();
+                cartItemRepository.DeleteByIdListOnSubmit(cartItemIdList);
+                cart.TotalPrice = 0;
+                cartRepository.UpdateByIdOnSubmit(cart);
+                dcp.CommitChanges();
+
+            }
+        }
     }
 }

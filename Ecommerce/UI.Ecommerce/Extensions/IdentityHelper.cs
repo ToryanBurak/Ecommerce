@@ -6,6 +6,8 @@ using Domain.Store;
 using Domain.Store.Enum;
 using BL.Store;
 using AutoMapper;
+using AspNetCoreGeneratedDocument;
+using Microsoft.AspNetCore.Identity;
 
 namespace UI.Ecommerce.Extensions
 {
@@ -31,6 +33,19 @@ namespace UI.Ecommerce.Extensions
             ClaimsPrincipal principal = new ClaimsPrincipal(identity);
             var authProperties = new AuthenticationProperties();
             await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProperties);
+        }
+
+        public async static void UpdateUserVerifyState(HttpContext context)
+        {
+            var claims = context.User.Claims.ToList();
+            Claim verifyStateClaim = claims.First(x => x.Type == "User.ConfirmState");
+            claims.Remove(verifyStateClaim);
+            claims.Add(new Claim("User.ConfirmState", "true"));
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+            await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
         }
 
         public async static void Logout(HttpContext context)

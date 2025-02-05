@@ -41,8 +41,19 @@ namespace UI.Ecommerce.Controllers
 
         public IActionResult SignIn()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View("Index");
+            }
+            else
+            {
+                return View();
+            }
+            
         }
+
+
+
 
         [HttpPost]
         public IActionResult Register(LoginRegisterViewModel model)
