@@ -120,6 +120,16 @@ namespace UI.BackOffice.Controllers
             return View(categoryViewModel);
         }
         [Authorize]
+        [HttpPost]
+        public IActionResult AddProduct(ProductViewModel productViewModel)
+        {
+            ProductBL productBL = new ProductBL(_mapper);
+            int imageUrlId = UploadImageAndImageUrlId(productViewModel.Image, FtpDirectoryEnum.Product);
+            productViewModel.ImageUrlId = imageUrlId;
+            productBL.AddProduct(_mapper.Map<ProductDO>(productViewModel));
+            return RedirectToAction("ProductList");
+        }
+        [Authorize]
         public IActionResult EditProduct(int id)
         {
             ProductBL productBL = new ProductBL(_mapper);
