@@ -1,0 +1,50 @@
+﻿@model List<Domain.Backoffice.ProductDO>
+
+<div class="container mt-5">
+    <h2 class="text-center">Ürün Listesi</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>İsim</th>
+                <th>Resim</th>
+                <th>Fiyat</th>
+                <th>Kategori</th>
+                <th>Aktiflik</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                var active = product.IsActive ? "Aktif" : "Pasif";
+                var rowClass = product.IsActive ? "" : "inactive-row";
+                <tr class="@rowClass">
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td><img src="@product.ImageUrl.Url" alt="@product.Name" class="img-fluid" style="width: 150px; height: 150px;" /></td>
+                    <td>@product.Price</td>
+                    <td>@UI.BackOffice.Helper.SelectHelper.GetCategoryNameById(product.CategoryId).ToString()</td>
+                    <td>@active</td>
+                    <td>
+                        @if (product.IsActive)
+                        {
+                            <a href="@Url.Action("EditProduct", "Home", new { id = product.Id })" class="btn btn-warning btn-sm">Düzenle</a>
+                            <a href="@Url.Action("DeleteProduct", "Home", new { id = product.Id })" class="btn btn-danger btn-sm">Sil</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("ActivateProduct", "Home", new { id = product.Id })" class="btn btn-success btn-sm">Aktif Yap</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .inactive-row {
+        background-color: rgb(232, 117, 117, 0.30); /* Saydam kırmızı arka plan */
+    }
+</style>

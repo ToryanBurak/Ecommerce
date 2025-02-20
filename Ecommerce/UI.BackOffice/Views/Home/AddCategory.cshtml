@@ -1,0 +1,19 @@
+﻿@model Domain.Backoffice.CategoryViewModel
+@{
+    ViewData["Title"] = "Dosya Yükle";
+}
+
+<h2>Kategori Ekle</h2>
+
+<form method="post" asp-action="AddCategory" asp-controller="Home" enctype="multipart/form-data">
+    <input type="hidden" name="ftpDirectoryEnum" value="@Domain.Backoffice.Enum.FtpDirectoryEnum.Category" />
+    <div class="mb-3">
+        <label for="text" class="form-label">İsim</label>
+        <input type="text" name="Category.Name" class="form-control" asp-for="Category.Name" required id="reg-fn">
+    </div>
+    <div class="form-group">
+        <label for="file">Resim Seçin</label>
+        <input type="file" asp-for="Image" name="Image" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Yükle</button>
+</form>

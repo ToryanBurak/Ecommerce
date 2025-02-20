@@ -1,0 +1,162 @@
+﻿@model Domain.Store.CartDO
+@{
+    ViewData["Title"] = "Alışveriş Sepeti";
+}
+
+<div class="page-title-overlap bg-dark pt-4">
+    <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+            <nav aria-label="breadcrumb">
+            </nav>
+        </div>
+        <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+            <h1 class="h3 text-light mb-0">Alışveriş Sepeti</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container pb-5 mb-2 mb-md-3">
+    <div class="alert alert-info">Sepetinizdeki ürünleri değiştirebilirsiniz.</div>
+
+    <div class="table-responsive">
+        <table class="table table-hover mb-0" id="cartTable">
+            <thead>
+                <tr>
+                    <th>Ürün</th>
+                    <th class="text-center">Fiyat</th>
+                    <th class="text-center">
+                        <button class="btn btn-sm btn-outline-danger" id="btnClearCart">
+                            <i class="czi-close-circle"></i> Temizle
+                        </button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (Domain.Store.CartItemDO cartItem in Model.CartItems)
+                    {
+                        <tr>
+                            <td>
+                                <div class="media align-items-center">
+                                    <a class="d-block mr-2" href="#">
+                                        <img src="@cartItem.Product.ImageUrl.Url" width="64" alt="@cartItem.Product.Name">
+                                    </a>
+                                    <div class="media-body">
+                                        <h6 class="product-title mb-0">
+                                            <a href="@Url.Action("Details", "Product", new {id = cartItem.Product.Id})">@cartItem.Product.Name</a>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-center text-lg text-medium" data-price="100">@cartItem.Product.Price₺</td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-outline-danger btn-remove" type="button">
+                                    <i class="czi-close-circle"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <h1>Sepetiniz Boş.</h1>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row justify-content-end pt-3">
+        <div class="col-md-5 col-xl-4">
+            <div class="bg-secondary rounded px-3 py-4">
+                <div class="d-flex justify-content-between align-items-center font-size-lg mb-4">
+                    <span class="text-muted">Toplam:</span>
+                    <span class="font-weight-medium" id="cartTotal">@Model.TotalPrice₺</span>
+                </div>
+                <a class="btn btn-primary btn-block" asp-controller="Checkout" asp-action="Index">
+                    Ödemeye Devam Et
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cartTable = document.getElementById('cartTable');
+            const btnClearCart = document.getElementById('btnClearCart');
+            const subtotalSpan = document.getElementById('cartSubtotal');
+            const shippingSpan = document.getElementById('cartShipping');
+            const totalSpan = document.getElementById('cartTotal');
+
+            const shippingCost = 10;
+
+            calculateCartTotals();
+
+            cartTable.querySelectorAll('.btn-decrement').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const input = this.closest('.input-group').querySelector('.cart-qty');
+                    let val = parseInt(input.value) || 1;
+                    if (val > 1) {
+                        val--;
+                        input.value = val;
+                    }
+                    updateRowSubtotal(this);
+                    calculateCartTotals();
+                });
+            });
+
+            cartTable.querySelectorAll('.btn-increment').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const input = this.closest('.input-group').querySelector('.cart-qty');
+                    let val = parseInt(input.value) || 1;
+                    val++;
+                    input.value = val;
+                    updateRowSubtotal(this);
+                    calculateCartTotals();
+                });
+            });
+
+            cartTable.querySelectorAll('.btn-remove').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const row = this.closest('tr');
+                    row.remove();
+                    calculateCartTotals();
+                });
+            });
+            btnClearCart.addEventListener('click', function () {
+                const rows = cartTable.querySelectorAll('tbody tr');
+                rows.forEach(r => r.remove());
+                calculateCartTotals();
+            });
+
+            function updateRowSubtotal(button) {
+                const row = button.closest('tr');
+                const priceCell = row.querySelector('[data-price]');
+                const qtyInput = row.querySelector('.cart-qty');
+                const subtotalCell = row.querySelector('.subtotalCell');
+
+                let price = parseFloat(priceCell.getAttribute('data-price')) || 0;
+                let qty = parseInt(qtyInput.value) || 1;
+                let subtotal = price * qty;
+                subtotalCell.textContent = `₺${subtotal.toFixed(2)}`;
+            }
+            function calculateCartTotals() {
+                let sum = 0;
+                cartTable.querySelectorAll('tbody tr').forEach(row => {
+                    const subtotalCell = row.querySelector('.subtotalCell');
+                    if (subtotalCell) {
+                        let text = subtotalCell.textContent.replace('₺', '').trim();
+                        let val = parseFloat(text) || 0;
+                        sum += val;
+                    }
+                });
+                subtotalSpan.textContent = `₺${sum.toFixed(2)}`;
+
+                let total = sum + shippingCost;
+                totalSpan.textContent = `₺${total.toFixed(2)}`;
+            }
+        });
+    </script>
+}

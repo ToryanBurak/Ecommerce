@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Backoffice</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden; /* Taşmayı önler */
+        }
+
+        .sidebar {
+            width: 80px; /* Dar hali */
+            background-color: #343a40;
+            color: white;
+            height: 100%;
+            position: fixed; /* Sabit konum */
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Sidebar içerik üzerinde kalır */
+            transition: width 0.3s ease; /* Animasyon */
+            overflow-x: hidden; /* Yan taşmaları önler */
+        }
+
+            .sidebar:hover {
+                width: 250px; /* Genişleme */
+            }
+
+            .sidebar a {
+                color: white;
+                text-decoration: none;
+                padding: 10px 15px;
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+                overflow: hidden;
+                transition: background-color 0.3s ease, padding-left 0.3s ease;
+            }
+
+                .sidebar a:hover {
+                    background-color: #495057;
+                }
+
+            .sidebar .icon {
+                margin-right: 10px;
+                font-size: 1.2rem;
+                transition: margin-right 0.3s ease;
+            }
+
+            .sidebar .text {
+                opacity: 0; /* Yazılar gizli */
+                transition: opacity 0.3s ease;
+            }
+
+            .sidebar:hover .text {
+                opacity: 1; /* Yazılar görünür */
+            }
+
+        .content {
+            margin-left: 80px; /* Dar sidebar genişliği */
+            padding: 20px;
+            flex-grow: 1;
+            background-color: #f8f9fa;
+            transition: margin-left 0.3s ease;
+        }
+
+        .sidebar:hover ~ .content {
+            margin-left: 250px; /* Geniş sidebar genişliği */
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h4 class="text-center py-3"><i class="fa-solid fa-list fa-lg"></i></h4>
+        <a href="@Url.Action("Index","Home")" class="nav-link">
+            <span class="icon bi bi-house-door"></span> <span class="text">Anasayfa</span>
+        </a>
+        <a href="#products" class="nav-link" data-bs-toggle="collapse">
+            <span class="icon bi bi-box-seam"></span> <span class="text">Ürünler</span>
+        </a>
+        <div class="collapse ps-3" id="products">
+            <a href="@Url.Action("AddProduct","Home")" class="nav-link">Ürün Ekle</a>
+            <a href="@Url.Action("ProductList","Home")" class="nav-link">Ürünleri Göster</a>
+        </div>
+        <a href="#categories" class="nav-link" data-bs-toggle="collapse">
+            <span class="icon bi bi-list-ul"></span> <span class="text">Kategoriler</span>
+        </a>
+        <div class="collapse ps-3" id="categories">
+            <a href="@Url.Action("AddCategory","Home")" class="nav-link">Kategori Ekle</a>
+            <a href="@Url.Action("CategoryList","Home")" class="nav-link">Kategorileri Göster</a>
+        </div>
+        <a href="@Url.Action("CustomerList","Home")" class="nav-link">
+            <span class="icon bi bi-people"></span> <span class="text">Müşteriler</span>
+        </a>
+        <a href="@Url.Action("OrderList","Home")" class="nav-link">
+            <span class="icon bi bi-cash-coin"></span> <span class="text">Siparişler</span>
+        </a>
+        <a href="@Url.Action("Logout","Home")" class="nav-link">
+            <span class="icon bi bi-cash-coin"></span><span class="text">Çıkış Yap</span>
+        </a>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

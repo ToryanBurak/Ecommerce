@@ -1,0 +1,29 @@
+﻿@model Domain.Backoffice.ProductDO
+@{
+    ViewData["Title"] = "Dosya Yükle";
+}
+
+<h2>Ürün Ekle</h2>
+
+<form method="post" asp-action="EditProduct" asp-controller="Home" enctype="multipart/form-data">
+    <input type="hidden" asp-for="CategoryId" name="CategoryId"/>
+    <input type="hidden" asp-for="ImageUrlId" name="ImageUrlId"/>
+    <input type="hidden" asp-for="IsActive" name="IsActive"/>
+    <div class="mb-3">
+        <label for="text" class="form-label">ID</label>
+        <input type="text" name="Id" class="form-control" disabled="disabled" asp-for="Id" required id="reg-fn">
+    </div>
+    <div class="mb-3">
+        <label for="text" class="form-label">İsim</label>
+        <input type="text" name="Name" class="form-control" asp-for="Name" required id="reg-fn">
+    </div>
+    <div class="mb-3">
+        <label for="text" class="form-label">Fiyat</label>
+        <input type="number" name="Price" class="form-control" asp-for="Price" required id="reg-fn">
+    </div>
+    <div class="mb-3">
+        <label for="text" class="form-label">Kategori</label>
+        @Html.DropDownListFor(x => x.CategoryId, UI.BackOffice.Helper.SelectHelper.GetCategoryList(), new { @class = "form-control", @disabled = "disabled", @name = "CategoryId" })
+    </div>
+    <button type="submit" class="btn btn-primary">Düzenle</button>
+</form>

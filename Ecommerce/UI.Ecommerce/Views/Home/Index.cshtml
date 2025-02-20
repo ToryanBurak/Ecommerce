@@ -1,0 +1,243 @@
+﻿@model List<Domain.Store.CategoryDO>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .swiper-container {
+        width: 100%;
+        height: 300px; /* İstediğiniz yüksekliği belirleyin */
+    }
+
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #eee;
+    }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+</style>
+<!-- Slick Carousel CSS -->
+<link rel="stylesheet" type="text/css" href="~/css/theme.css" />
+<link rel="stylesheet" type="text/css" href="~/css/theme.min.css" />
+<link rel="stylesheet" type="text/css" href="~/css/theme/components/_carousel.scss" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<!-- Slick Carousel JavaScript -->
+<script type="text/javascript" src="~/js/theme.min.js"></script>
+
+
+<section class="bg-accent bg-position-center-top bg-no-repeat py-5"
+         style="background-image: url(img/home/marketplace-hero.jpg);">
+    <div class="pb-lg-5 mb-lg-3">
+        <div class="container py-lg-5 my-lg-5">
+            <div class="row mb-4 mb-sm-5">
+                <div class="col-lg-7 col-md-9 text-center text-sm-left">
+                    <h1 class="text-white line-height-base">
+                        <span class='font-weight-light'>Tüm</span> Türkiye'de <span class='font-weight-light'>mutlu</span> milyonlarca <span class='font-weight-light'>müşteri</span>
+                    </h1>
+                    <h2 class="h5 text-white font-weight-light">Siz de ailemize katılın!</h2>
+                </div>
+            </div>
+            <div class="row pb-lg-5 mb-4 mb-sm-5">
+                <div class="col-lg-6 col-md-8">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="kategorianasayfa ">
+    @{ int temp = 0;}
+    @foreach (Domain.Store.CategoryDO category in Model)
+    {
+        temp++;
+        if (temp % 2 == 1)
+        {
+            <div class="container pt-lg-3 mb-4 mb-sm-5 bg-warning">
+                <div class="row">
+                    <!-- Banner with controls-->
+                    <div class="col-md-3">
+                        <div class="d-flex flex-column h-100 overflow-hidden rounded-lg" style="background-color: #f6f8fb;">
+                            <div class="d-flex justify-content-between px-grid-gutter py-grid-gutter">
+                                <div>
+                                    <h3 class="mb-1">@category.Name</h3>
+                                </div>
+                                <div class="cz-custom-controls" id="for-women">
+                                    <button type="button"><i class="czi-arrow-left"></i></button>
+                                    <button type="button"><i class="czi-arrow-right"></i></button>
+                                </div>
+                            </div><a class="d-none d-md-block mt-auto" href="shop-grid-ls.html"><img class="d-block w-100" src="@category.ImageUrl.Url" alt="For Women"></a>
+                        </div>
+                    </div>
+                    <!-- Product grid (carousel)-->
+                    <div class="col-md-9 pt-md-0">
+                        <div class="row">
+                            <!-- kaydırma2-->
+                            @foreach (Domain.Store.ProductDO product in category.Products.Where(x => x.IsActive == true).ToList())
+                            {
+                                <div class="col-lg-4 col-md-6 px-0 px-sm-2 mb-sm-4 d-none d-lg-block">
+                                    <div class="card product-card card-static">
+                                        <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img src="@product.ImageUrl.Url" alt="@product.Name" style="width: 300px; height: 300px; "></a>
+                                        <div class="card-body py-2">
+                                            <a class="product-meta d-block font-size-xs pb-1" href="#">@category.Name</a>
+                                            <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">@product.Name</a></h3>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="product-price"><span class="text-accent">@product.Price<small>.00₺</small></span></div>
+                                                <div class="star-rating">
+                                                    <i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <!-- kaydırma2-->
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <!-- Category (ELektronik)-->
+            <div class="container pt-lg-4 mb-4 mb-sm-5 bg-success" style="padding-left: 50px; padding-right: 50px;">
+                <div class="row">
+                    <!-- Banner with controls-->
+                    <div class="col-md-3 order-md-2">
+                        <div class="d-flex flex-column h-100 overflow-hidden rounded-lg" style="background-color: #f6f8fb;">
+                            <div class="d-flex justify-content-between px-grid-gutter py-grid-gutter">
+                                <div class="order-md-2">
+                                    <h3 class="mb-1">@category.Name</h3>
+                                </div>
+                                <div class="cz-custom-controls order-md-1" id="for-men">
+                                    <button type="button"><i class="czi-arrow-left"></i></button>
+                                    <button type="button"><i class="czi-arrow-right"></i></button>
+                                </div>
+                            </div><a class="d-none d-md-block mt-auto" href="shop-grid-ls.html"><img class="d-block w-100" src="@category.ImageUrl.Url" alt="Elektronik"></a>
+                        </div>
+                    </div>
+                    <!-- Product grid (carousel)-->
+                    <div class="col-md-9 pt-4 pt-md-0">
+                        <div class="row">
+                            <!-- kaydrıma1-->
+                            @foreach (Domain.Store.ProductDO product in category.Products.Where(x => x.IsActive == true).ToList())
+                            {
+                                <div class="col-lg-4 col-md-6 px-0 px-sm-2 mb-sm-4 d-none d-lg-block">
+                                    <div class="card product-card card-static">
+                                        <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img src="@product.ImageUrl.Url" alt="@product.Name" style="width: 300px; height: 300px; "></a>
+                                        <div class="card-body py-2">
+                                            <a class="product-meta d-block font-size-xs pb-1" href="#">@category.Name</a>
+                                            <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">@product.Name</a></h3>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="product-price"><span class="text-accent">@product.Price<small>.00₺</small></span></div>
+                                                <div class="star-rating">
+                                                    <i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <!-- kaydrıma2-->
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<!-- Recent products grid-->
+<!-- NEDEN BİZ?-->
+<section class="bg-accent bg-size-cover bg-position-center pt-5 pb-4 pb-lg-5"
+         style="background-image: url(img/marketplace/features/features-bg.jpg);">
+    <div class="container pt-lg-3">
+        <h2 class="h3 mb-3 pb-4 text-light text-center">Neden BURSİMEMFUR? </h2>
+        <div class="row pt-lg-2 text-center">
+            <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+                <div class="d-inline-block">
+                    <div class="media media-ie-fix align-items-center text-left">
+                        <img src="img/marketplace/features/quality.png" width="52" alt="Quality Guarantee">
+                        <div class="media-body pl-3">
+                            <h6 class="text-light font-size-base mb-1">Yüksek Kalite</h6>
+                            <p class="text-light font-size-ms opacity-70 mb-0">
+                                Deneyimli kailte kontrol personellerimiz
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+                <div class="d-inline-block">
+                    <div class="media media-ie-fix align-items-center text-left">
+                        <img src="img/marketplace/features/support.png" width="52" alt="Customer Support">
+                        <div class="media-body pl-3">
+                            <h6 class="text-light font-size-base mb-1">Müşteri Desteği</h6>
+                            <p class="text-light font-size-ms opacity-70 mb-0">7/24 her sorununuzda yanınızda ekip</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+                <div class="d-inline-block">
+                    <div class="media media-ie-fix align-items-center text-left">
+                        <img src="img/marketplace/features/secure.png" width="52" alt="Secure Payments">
+                        <div class="media-body pl-3">
+                            <h6 class="text-light font-size-base mb-1">Güvenli Ödeme</h6>
+                            <p class="text-light font-size-ms opacity-70 mb-0">
+                                SSL güvenlik sertifikalı ödeme yöntemi
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- Toast: Added to Cart-->
+<div class="toast-container toast-bottom-center">
+    <div class="toast mb-3" id="cart-toast" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+            <i class="czi-check-circle mr-2"></i>
+            <h6 class="font-size-sm text-white mb-0 mr-auto">Sepete Eklendi</h6>
+            <button class="close text-white ml-2 mb-1" type="button" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">Ürün Zaten Sepetinizde</div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<script>
+    // Swiper Initialization
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 3,           // Görüntülenen öğe sayısı
+        spaceBetween: 15,           // Öğeler arasındaki boşluk
+        loop: true,                 // Sonsuz döngü
+        navigation: {               // Oklar
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        },
+        pagination: {               // Sayfa numarası
+            el: '.swiper-pagination',
+            clickable: true
+        },
+        breakpoints: {              // Farklı ekran boyutlarına göre responsive
+            0: { slidesPerView: 1 },
+            500: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
+            992: { slidesPerView: 3 }
+        }
+    });
+</script>

@@ -1,0 +1,35 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Doğrulama Kodu";
+}
+
+<div class="d-flex justify-content-center my-5">
+
+    <div class="card shadow p-4" style="max-width: 400px;">
+
+        <h4 class="card-title text-center mb-3">E-posta Doğrulama</h4>
+        @{
+            string modelstring = String.IsNullOrWhiteSpace(Model) ? string.Empty : Model;
+
+                <p class="text-danger text-center mb-4" style="font-size: 0.9rem;">@modelstring</p>
+        }
+        <p class="text-muted text-center mb-4" style="font-size: 0.9rem;">
+            Lütfen e-postanıza gelen doğrulama kodunu giriniz
+        </p>
+        <!-- Form -->
+        <form asp-action="VerifyConfirmCode" method="post">
+            <div class="form-group">
+                <label for="Code">Kod</label>
+                <input name="confirmcode"
+                       id="Code"
+                       class="form-control"
+                       placeholder="6 haneli kod"
+                       style="max-width: 100%;" />
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Doğrula</button>
+            </div>
+        </form>
+    </div>
+</div>

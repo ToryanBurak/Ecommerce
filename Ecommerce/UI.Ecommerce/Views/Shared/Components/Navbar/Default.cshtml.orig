@@ -1,0 +1,221 @@
+﻿@model Domain.Store.IndexViewModel
+
+
+
+<div class="topbar topbar-dark bg-dark">
+    <div class="container">
+        <div class="topbar-text dropdown d-md-none">
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="tel:+90 533 333 33 33"><i class="czi-support text-muted mr-2"></i>+90 545 759 40 33</a></li>
+            </ul>
+        </div>
+        <div class="topbar-text text-nowrap d-none d-md-inline-block"><i class="czi-support"></i><span class="text-muted mr-1">Destek</span><a class="topbar-link" href="tel:00331697720">+90 545 759 40 33</a></div>
+        <div class="cz-carousel cz-controls-static d-none d-md-block">
+            <div class="cz-carousel-inner" data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;nav&quot;: false}">
+                <div class="topbar-text">400₺ üzerine kargo ücretsiz</div>
+                <div class="topbar-text">Memnuniyet garantisi</div>
+                <div class="topbar-text">7/24 Destek</div>
+            </div>
+        </div>
+        <div class="ml-3 text-nowrap">
+
+        </div>
+    </div>
+</div>
+<div class="navbar-sticky bg-light">
+    <div class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <div class="categories-logo" style="
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-direction: row;">
+
+                <a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0" href="index.html" style="min-width: 7rem;"><img width="142" src="~/img/logo-dark.png" alt="Cartzilla" /></a><a class="navbar-brand d-sm-none mr-2" href="index.html" style="min-width: 4.625rem;"><img width="74" src="~/img/logo-icon.png" alt="Cartzilla" /></a>
+            </div>
+
+
+
+
+            @*   <div class="input-group-overlay d-none d-lg-flex mx-4">
+                    <input class="form-control appended-form-control" type="text" placeholder="Search for products">
+                    <div class="input-group-append-overlay"><span class="input-group-text"><i class="czi-search"></i></span></div>
+                </div> *@
+            <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button><a class="navbar-tool navbar-stuck-toggler" href="#">
+                    <span class="navbar-tool-tooltip">Menü</span>
+                </a><a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="#signin-modal" data-toggle="modal">
+                    <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
+
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a class="navbar-tool-text ml-n3" href="@Url.Action("SignIn", "Home")">
+                            <small>Hoş geldiniz, giriş yapın</small>Giriş yap
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="navbar-tool-text ml-n3" href="@Url.Action("Index", "User")">
+                            <small>Hesap</small>@Model.User.FirstName @Model.User.LastName
+                        </a>
+                    }
+
+                </a>
+                <div class="navbar-tool dropdown ml-3">
+<<<<<<< HEAD
+                    <a class="navbar-tool-icon-box bg-secondary dropdown-toggle"
+                       asp-controller="Cart"
+                       asp-action="Index">
+                        <span class="navbar-tool-label">4</span>
+                        <i class="navbar-tool-icon czi-cart"></i>
+                    </a>
+                    <a class="navbar-tool-text"
+                       asp-controller="Cart"
+                       asp-action="Index">
+                        <small>Sepetim</small>
+                    </a>                   
+                    <div class="dropdown-menu dropdown-menu-right" style="width: 20rem;">
+                        <div class="widget widget-cart px-3 pt-2 pb-3">
+                            
+                            <div style="max-height: 15rem; overflow-y: auto;">
+
+                                
+                                <div class="widget-cart-item pb-2 border-bottom">
+                                    <button class="close text-danger" type="button" aria-label="Remove">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <div class="media align-items-center">
+                                        <a class="d-block mr-2" href="#">
+                                            <img src="~/img/shop/cart/02.jpg" width="64" alt="Ürün 2" />
+                                        </a>
+                                        <div class="media-body">
+                                            <h6 class="widget-product-title mb-0">
+                                                <a href="#">Ürün Adı 2</a>
+                                            </h6>
+                                            <div class="product-meta">
+                                                <span class="text-muted">Renk:</span> Kırmızı
+                                            </div>
+                                        </div>
+                                       
+                                        <span class="text-center text-lg text-medium ml-2">₺240.00</span>
+                                    </div>
+                                </div>
+
+                                <div class="widget-cart-item pb-2 border-bottom">
+                                    <button class="close text-danger" type="button" aria-label="Remove">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <div class="media align-items-center">
+                                        <a class="d-block mr-2" href="#">
+                                            <img src="~/img/shop/cart/03.jpg" width="64" alt="Ürün 3" />
+                                        </a>
+                                        <div class="media-body">
+                                            <h6 class="widget-product-title mb-0">
+                                                <a href="#">Ürün Adı 3</a>
+                                            </h6>
+                                            <div class="product-meta">
+                                                <span class="text-muted">Beden:</span> M
+                                            </div>
+                                        </div>
+                                       
+                                        <span class="text-center text-lg text-medium ml-2">₺190.00</span>
+                                    </div>
+                                </div>
+
+                               
+                                <div class="widget-cart-item pb-2 border-bottom">
+                                    <button class="close text-danger" type="button" aria-label="Remove">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <div class="media align-items-center">
+                                        <a class="d-block mr-2" href="#">
+                                            <img src="~/img/shop/cart/01.jpg" width="64" alt="Ürün 1" />
+                                        </a>
+                                        <div class="media-body">
+                                            <h6 class="widget-product-title mb-0">
+                                                <a href="#">Ürün Adı 1</a>
+                                            </h6>
+                                            <div class="product-meta">
+                                                <span class="text-muted">Renk:</span> Siyah
+                                            </div>
+                                        </div>
+                                      
+                                        <span class="text-center text-lg text-medium ml-2">₺120.00</span>
+                                    </div>
+                                </div>
+
+                            
+                                <div class="widget-cart-item pb-2 border-bottom">
+                                    <button class="close text-danger" type="button" aria-label="Remove">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <div class="media align-items-center">
+                                        <a class="d-block mr-2" href="#">
+                                            <img src="~/img/shop/cart/02.jpg" width="64" alt="Ürün 4" />
+                                        </a>
+                                        <div class="media-body">
+                                            <h6 class="widget-product-title mb-0">
+                                                <a href="#">Ürün Adı 4</a>
+                                            </h6>
+                                            <div class="product-meta">
+                                                <span class="text-muted">Renk:</span> Lacivert
+                                            </div>
+                                        </div>
+                                       
+                                        <span class="text-center text-lg text-medium ml-2">₺300.00</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                           
+                            <div class="text-center mt-3">
+                                <a asp-controller="Cart" asp-action="Index" class="btn btn-primary btn-sm">
+                                    Sepeti Görüntüle
+                                </a>
+=======
+                    <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html"><i class="navbar-tool-icon czi-cart"></i></a><a class="navbar-tool-text" href="shop-cart.html"><small>Sepetim</small>@Model.Cart.TotalPrice₺</a>
+                    <!-- sepet önizlemesi-->
+                    <div class="dropdown-menu dropdown-menu-right" style="width: 20rem;">
+                        <div class="widget widget-cart px-3 pt-2 pb-3">
+                            <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">
+
+                                @foreach (Domain.Store.CartItemDO cartItem in Model.Cart.CartItems)
+                                {
+                                    <div class="widget-cart-item pb-2 border-bottom">
+                                        <form class="mb-grid-gutter" asp-controller="Cart" asp-action="RemoveCartItem" enctype="multipart/form-data" method="post">
+                                            <input type="hidden" name="cartItemId" value="@cartItem.Id" />
+                                            <div class="form-group d-flex align-items-center">
+                                                <button class="close text-danger" type="submit" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
+                                            </div>
+                                        </form>
+                                        
+                                        <div class="media align-items-center">
+                                            <a class="d-block mr-2" href="shop-single-v1.html"><img width="64" src="@cartItem.Product.ImageUrl.Url" alt="Product" /></a>
+                                            <div class="media-body">
+                                                <h6 class="widget-product-title"><a href="shop-single-v1.html">@cartItem.Product.Name</a></h6>
+                                                <div class="widget-product-meta"><span class="text-accent mr-2">@cartItem.Product.Price₺<small>00</small></span><span class="text-muted">x 1</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+
+
+                                <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
+                                    <div class="font-size-sm mr-2 py-2"><span class="text-muted">Toplam:</span><span class="text-accent font-size-base ml-1">@Model.Cart.TotalPrice<small>00₺</small></span></div>
+                                    <a class="btn btn-outline-secondary btn-sm" href="shop-cart.html">Sepete Git<i class="czi-arrow-right ml-1 mr-n1"></i></a>
+                                </div>
+                                <a class="btn btn-primary btn-sm btn-block" href="checkout-details.html"><i class="czi-card mr-2 font-size-base align-middle"></i>Ödeme Yap</a>
+>>>>>>> 925b6b3754966218cf5b21b990ed24be9c32a842
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+            </div>
+        </div>
+
+    </div>

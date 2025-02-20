@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - UI.Ecommerce</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/UI.Ecommerce.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" media="screen" href="~/css/vendor.min.css">
+    <link rel="stylesheet" media="screen" id="main-styles" href="~/css/theme.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <script src="~/js/vendor.min.js"></script>
+    <script src="~/js/theme.min.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    <link rel="stylesheet" media="screen" href="css/vendor.min.css">
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" id="main-styles" href="css/theme.min.css">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    <link rel="stylesheet" media="screen" href="css/vendor.min.css">
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" id="main-styles" href="css/theme.min.css">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    <link rel="stylesheet" media="screen" href="css/vendor.min.css">
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" id="main-styles" href="css/theme.min.css">
+    <link rel="stylesheet" href="~/css/theme.min.css" />
+    <link rel="stylesheet" href="~/css/vendor.min.css" />
+    <script src="~/js/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/theme.min.js"></script>
+    <!-- ve benzeri -->
+    <!-- ve benzeri -->
+    <!-- Google Tag Manager-->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WKV3GT5');
+    </script>
+    <!-- Google Tag Manager-->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WKV3GT5');
+    </script>
+    <!-- Google Tag Manager-->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WKV3GT5');
+    </script>
+
+    <script await setElementStyles($0.querySelector('body'), { 'min-height' : '100vh' });></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container-fluid" style="padding-left: 0px !important; padding-right: 0px !important;">
+            @await Component.InvokeAsync("Navbar")
+        </div>
+    </header>
+    @RenderBody()
+
+    <footer class="bg-dark pt-5">
+        <div class="container">
+            <div class="row pb-2">
+                <div class="col-md-4 col-sm-6">
+                    <div class="widget widget-links widget-light pb-2 mb-4">
+                        <h3 class="widget-title text-light">Kategoriler</h3>
+                        <ul class="widget-list">
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Giyim</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Ayakkabı</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Teknoloji</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Ev</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Aksesuar</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Diğer</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="widget widget-links widget-light pb-2 mb-4">
+                        <h3 class="widget-title text-light">Hesap ve Sipariş</h3>
+                        <ul class="widget-list">
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Hesabım</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link" href="#">Sipariş Takibi</a></li>
+                        </ul>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="pt-5 bg-darker">
+            <div class="container">
+                <div class="row pb-3">
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="media">
+                            <i class="czi-rocket text-primary" style="font-size: 2.25rem;"></i>
+                            <div class="media-body pl-3">
+                                <h6 class="font-size-base text-light mb-1">Hızlı ve ücretsiz teslimat</h6>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="media">
+                            <i class="czi-currency-exchange text-primary" style="font-size: 2.25rem;"></i>
+                            <div class="media-body pl-3">
+                                <h6 class="font-size-base text-light mb-1">İade garantisi</h6>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="media">
+                            <i class="czi-support text-primary" style="font-size: 2.25rem;"></i>
+                            <div class="media-body pl-3">
+                                <h6 class="font-size-base text-light mb-1">7/24 Destek</h6>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="media">
+                            <i class="czi-card text-primary" style="font-size: 2.25rem;"></i>
+                            <div class="media-body pl-3">
+                                <h6 class="font-size-base text-light mb-1">Güvenilir Ödeme</h6>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="hr-light pb-4 mb-3">
+                <div class="row pb-2">
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

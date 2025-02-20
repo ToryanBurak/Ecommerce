@@ -1,0 +1,14 @@
+﻿@model string
+<div class="row">
+    <div class="col-4 offset-4">
+        <h1 class="display-4 border-bottom text-center pb-2">@ViewData["Title"]</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col text-center">
+        <h1 class="text-danger text-center"><i class="fa-solid fa-circle-xmark fa-3x" style="color: #ff0000;"></i></h1>
+        <h2 class="text-center">Hata!</h2>
+        <h3 class="text-center">@Model.ToString()</h3>
+        <a asp-action="Index" asp-controller="Home" class="text-center btn btn-outline-success">Anasayfaya Dön</a>
+    </div>
+</div>
